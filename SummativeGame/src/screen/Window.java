@@ -1,5 +1,8 @@
 package screen;
 
+import java.awt.Canvas;
+import java.awt.Dimension;
+
 import javax.swing.JFrame;
 
 /*
@@ -9,6 +12,8 @@ public class Window {
 
 	//variable to store the JFrame
 	private JFrame frame;
+	//canvas to add to the JFrame so things can be drawn
+	private Canvas canvas;
 	//variables to store the title width and height of the frame
 	private String title;
 	private int width, height;
@@ -42,6 +47,18 @@ public class Window {
 		frame.setLocationRelativeTo(null);
 		//makes the JFrame visible
 		frame.setVisible(true);
+		
+		//initialize the canvas object		
+		canvas = new Canvas();
+		//sets the size of the canvas in a way that ensures it can never change
+		canvas.setPreferredSize(new Dimension(width, height));
+		canvas.setMaximumSize(new Dimension(width, height));
+		canvas.setMinimumSize(new Dimension(width, height));
+		
+		//adds the canvas to the JFrame
+		frame.add(canvas);
+		//packs the JFrame so everything is displayed properly
+		frame.pack();
 	}
 	
 }
