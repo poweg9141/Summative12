@@ -1,5 +1,8 @@
 package coreEngine;
 
+import java.awt.Graphics;
+import java.awt.image.BufferStrategy;
+
 import screen.Window;
 /*
  * @author Graham Power
@@ -18,6 +21,10 @@ public class Game implements Runnable{
 	private Thread thread;
 	//stores whether the game is running or not
 	private boolean running;
+	
+	//creates a bufferStrategy and graphics object to render to the screen
+	private BufferStrategy bs;
+	private Graphics g;
 	
 	/**
 	 * Constructor to create the game
@@ -39,7 +46,30 @@ public class Game implements Runnable{
 	
 	//method the render the game to the screen once updated
 	private void render(){
+		//sets the buffer strategy to the displays buffer strategy
+		bs = display.getCanvas().getBufferStrategy();
+		//creates a buffer strategy if the display doesnt already have one
+		if(bs == null){
+			//creates a buffer strategy with three buffers
+			display.getCanvas().createBufferStrategy(3);
+			//leaves the method and doesnt render anything this frame
+			return;
+		}		
+		//allows the graphics object to draw to the buffer strategy
+		g = bs.getDrawGraphics();
 		
+		//clears the screen for new rendering
+		g.clearRect(0, 0, width, height);		
+		
+		//DRAWING BEGINS HERE
+					
+		
+		//DRAWING ENDS HERE
+		
+		//display the buffers to the screen
+		bs.show();
+		//gets rid of the old graphics object so it doesnt interfere with later drawing
+		g.dispose();
 	}
 
 	//method to run the game
