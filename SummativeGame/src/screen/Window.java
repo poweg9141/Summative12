@@ -61,4 +61,7 @@ public class Window {
 		frame.pack();
 	}
 	
+	public Canvas getCanvas(){
+		return canvas;
+	}
 }
