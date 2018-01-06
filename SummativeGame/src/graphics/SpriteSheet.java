@@ -2,8 +2,10 @@ package graphics;
 
 import java.awt.image.BufferedImage;
 
-/*
- * @author Graham Power
+/**
+ * a sheet with multiple images held within it
+ * @author Graham
+ *
  */
 public class SpriteSheet {
 	

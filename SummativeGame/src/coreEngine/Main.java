@@ -1,15 +1,19 @@
 package coreEngine;
 
+import loaders.ScoreLoader;
+import screen.DisplayManager;
 
-/*
- * @author Graham Power
+/**
+ * 
+ * @author Graham
+ *
  */
 public class Main {
 
 	public static void main(String[] args) {
-		//test code to get a window displayed on the screen
-		Game game = new Game("test", 800, 600);		
-		//starts the game
-		game.start();
+		//creates an object of the display manager
+		DisplayManager manager = new DisplayManager();
+		//starts the game launcher
+		manager.openLauncher();
 	}
 }

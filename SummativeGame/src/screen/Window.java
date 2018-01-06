@@ -5,8 +5,10 @@ import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
-/*
- * @author Graham Power
+/**
+ * class used to create a simple window
+ * @author Graham
+ *
  */
 public class Window {
 
@@ -46,22 +48,10 @@ public class Window {
 		//changes the original location of the JFrame to the centre of the screen
 		frame.setLocationRelativeTo(null);
 		//makes the JFrame visible
-		frame.setVisible(true);
-		
-		//initialize the canvas object		
-		canvas = new Canvas();
-		//sets the size of the canvas in a way that ensures it can never change
-		canvas.setPreferredSize(new Dimension(width, height));
-		canvas.setMaximumSize(new Dimension(width, height));
-		canvas.setMinimumSize(new Dimension(width, height));
-		
-		//adds the canvas to the JFrame
-		frame.add(canvas);
-		//packs the JFrame so everything is displayed properly
-		frame.pack();
+		frame.setVisible(true);			
 	}
 	
-	public Canvas getCanvas(){
-		return canvas;
+	public JFrame getFrame(){
+		return frame;
 	}
 }

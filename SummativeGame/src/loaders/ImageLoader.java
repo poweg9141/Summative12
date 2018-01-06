@@ -5,8 +5,10 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-/*
- * @author Graham Power
+/**
+ * 
+ * @author Graham
+ *
  */
 public class ImageLoader {
 
