@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import loaders.ScoreLoader;
+import screen.DisplayManager;
 import utils.Time;
 
 /**
@@ -40,9 +41,7 @@ public class TextWriter {
 			w.close();
 		} catch (IOException e) {
 			//if there is any problem with the file reader it closes the game
-			System.out.println("Text File UnWriteable.");
-			e.printStackTrace();
-			System.exit(1);
+			DisplayManager.quitGameOnError(e, "The scores file could not be created or written to, it may be corrupted or unreadable");
 		}			
 	}
 	

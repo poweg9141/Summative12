@@ -77,12 +77,14 @@ public class DisplayManager {
 	//used to open the settings window or start it if it has not already been initialized
 	public void openSettings(){
 		//does nothing at the moment
-		throw new UnsupportedOperationException();
+		Exception e =  new UnsupportedOperationException();
+		DisplayManager.quitGameOnError(e, "The method called is not yet supported.");
 	}
 	
 	//used to open the options window or start it if it has not already been initialized
 	public void openOptions(){
 		//does nothing at the moment
-		throw new UnsupportedOperationException();
+		Exception e =  new UnsupportedOperationException();
+		DisplayManager.quitGameOnError(e, "The method called is not yet supported.");
 	}
 }

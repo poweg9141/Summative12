@@ -64,5 +64,4 @@ public class KeyInput implements KeyListener{
 	public void keyTyped(KeyEvent e) {
 		//does nothing at the moment, here because implementing keyListener requires this method
 	}
-
 }

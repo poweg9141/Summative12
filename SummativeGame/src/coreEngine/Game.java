@@ -99,7 +99,7 @@ public class Game implements Runnable{
 		
 		//display the buffers to the screen
 		bs.show();
-		//gets rid of the old graphics object so it doesnt interfere with later drawing
+		//gets rid of the old graphics object so it doesn't interfere with later drawing
 		g.dispose();
 	}
 
@@ -129,9 +129,9 @@ public class Game implements Runnable{
 			}						
 			//when the max time has been taken, it renders to the screen
 			render();
-			//calculates the fps the game is currently runing at
+			//calculates the FPS the game is currently running at
 			fps = (int)(Math.ceil(1.0 / gameTimeSeconds));
-			//resets the lastTime variable to the curreent time
+			//resets the lastTime variable to the current time
 			lastTime = currentTime;
 		}		
 		//calls the stop method to close the thread now that the game has been closed
@@ -187,9 +187,7 @@ public class Game implements Runnable{
 			thread.join();
 		} catch (InterruptedException e) {
 			//if the thread cannot be joined prints out an error, the stack trace, and exits the program
-			System.out.println("error closing thread");
-			e.printStackTrace();
-			System.exit(1);
+			DisplayManager.quitGameOnError(e, "Error closing the games thread, the thread may have already been closed.");
 		}
 	}
 

@@ -5,6 +5,8 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import screen.DisplayManager;
+
 /**
  * 
  * @author Graham
@@ -44,13 +46,9 @@ public class ImageLoader {
 			//returns the loaded image at the specified file path
 			return ImageIO.read(ImageLoader.class.getResource(dir));
 		} catch (IOException e) {
-			//if the image cant load prints out error message with simple troubleshooting suggestions
-			System.out.println("Error Loading Image! File must be inside the "
+			//handles the error
+			DisplayManager.quitGameOnError(e, "Error Loading Image! File must be inside the "
 					+ "res/textures directory with the correct file format ID");
-			//prints out the stack trace
-			e.printStackTrace();
-			//exits the program
-			System.exit(1);
 		}
 		//returns null to remove errors, effectively unreachable code
 		return null;

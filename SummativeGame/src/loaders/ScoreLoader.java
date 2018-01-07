@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.Formatter;
 
 import coreEngine.GameVariables;
+import screen.DisplayManager;
 import writers.TextWriter;
 
 /**
@@ -86,7 +87,8 @@ public class ScoreLoader {
 			}
 		} catch (IOException e) {
 			//deals with the exception if the line cannot be read
-			e.printStackTrace();
+			DisplayManager.quitGameOnError(e, "Unable to readthe scores file, it may have been corrupted. "
+					+ "Deleting the file may fix this problem although the list of high scores will be erased");
 		}
 		//orders the scores into their separate arrays
 		orderScores(scores);
@@ -160,7 +162,9 @@ public class ScoreLoader {
 			//initializes the formatter with the file path the text file should be stored in
 			f = new Formatter(SCORE_TEXT_FILE_PATH);
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			DisplayManager.quitGameOnError(e, "Unable to create the new file for the high scores list. "
+					+ "There may already be a corrupted or uneditable file in the directory. "
+					+ "Try deleting the scores file in the game directory at res/files/scores");
 		}
 		//orders the new array of scores
 		orderScores(scores);
