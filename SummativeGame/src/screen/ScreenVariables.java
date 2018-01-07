@@ -23,6 +23,9 @@ public class ScreenVariables {
 	private static String settingsName = "";
 	private static int settingsWidth = 800, settingsHeight = 600;
 	
+	//stores the variables for the fatal error window
+	private static int fatalErrorWidth = 100, fatalErrorHeight = 100;
+	
 	//getters for all the variables
 	public static String getGameName() {
 		return gameName;
@@ -59,5 +62,11 @@ public class ScreenVariables {
 	}
 	public static int getSettingsHeight() {
 		return settingsHeight;
+	}
+	public static int getFatalErrorWidth() {
+		return fatalErrorWidth;
+	}
+	public static int getFatalErrorHeight() {
+		return fatalErrorHeight;
 	}
 }

@@ -12,6 +12,13 @@ public class GameVariables {
 	private static double playerHeight = 64;
 	//the speed of a player
 	private static double playerSpeed = 0.002;
+	//stores the default name and score for the high scores text file
+	//NOTE: default name must have NO spaces
+	private static String defaultHighScoreName = "WendyWako";
+
+	public static String getDefaultHighScoreName() {
+		return defaultHighScoreName;
+	}
 
 	public static double getPlayerSpeed() {
 		return playerSpeed;
