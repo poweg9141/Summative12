@@ -72,7 +72,7 @@ public class TextWriter {
 		//creates the crash reports file directory by combining the path with 
 		//the files name (the name plus the reformatted date stamp) and the file extension
 		String crashDir = ERROR_FILE_PATH + "crash-report-" + dateStamp + ERROR_FILE_EXTENSION;
-		//replaces all : in the directory with ; since siles with : in the directory name cannot be created
+		//replaces all : in the directory with ; since files with : in the directory name cannot be created
 		crashDir = crashDir.replaceAll(":", ";");
 		
 		try {

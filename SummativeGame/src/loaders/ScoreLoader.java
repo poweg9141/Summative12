@@ -166,8 +166,14 @@ public class ScoreLoader {
 					+ "There may already be a corrupted or uneditable file in the directory. "
 					+ "Try deleting the scores file in the game directory at res/files/scores");
 		}
+		
 		//orders the new array of scores
 		orderScores(scores);
+	}
+	
+	//calls the method that will write all the scores back to the text file
+	public void saveScores(){
+		TextWriter.writeScores(names, points);
 	}
 
 	public String[] getNames() {

@@ -3,6 +3,8 @@ package coreEngine;
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 
@@ -11,8 +13,11 @@ import javax.swing.JFrame;
 import entities.mobs.Player;
 import input.KeyInput;
 import loaders.ImageLoader;
+import loaders.ScoreLoader;
 import screen.DisplayManager;
 import screen.Window;
+import tiles.Tile;
+import tiles.types.WallTile;
 /**
  * class to run the games thread and control game logic
  * @author Graham
@@ -50,6 +55,8 @@ public class Game implements Runnable{
 	private DisplayManager manager;
 	//the key listener of the game
 	private KeyInput input;
+	//used to manage the high scores for the game
+	private ScoreLoader scores;
 	
 	//stores the player
 	Player player;
@@ -66,6 +73,8 @@ public class Game implements Runnable{
 		this.height = height;
 		this.title = title;
 		this.manager = manager;
+		//initializes the score loader
+		scores = new ScoreLoader();
 	}
 	
 	//method to update the game every frame before rendering
@@ -83,7 +92,7 @@ public class Game implements Runnable{
 			c.createBufferStrategy(3);
 			//leaves the method and doesnt render anything this frame
 			return;
-		}		
+		}
 		//allows the graphics object to draw to the buffer strategy
 		g = bs.getDrawGraphics();
 		
@@ -91,10 +100,9 @@ public class Game implements Runnable{
 		g.clearRect(0, 0, width, height);		
 		
 		//DRAWING BEGINS HERE
-
-		//g.fillRect(0, 0, 100, 100);
 		player.render(g);
-		
+		//renders a tile for testing
+		Tile.tiles[Tile.returnRenderID(GameVariables.getStoneTileId())].render(g, 100, 100);
 		//DRAWING ENDS HERE
 		
 		//display the buffers to the screen
@@ -134,6 +142,8 @@ public class Game implements Runnable{
 			//resets the lastTime variable to the current time
 			lastTime = currentTime;
 		}		
+		//calls the method to run all code that must execute before the game closes
+		closeGame();
 		//calls the stop method to close the thread now that the game has been closed
 		stop();
 	}
@@ -157,11 +167,40 @@ public class Game implements Runnable{
 		//packs the JFrame so everything is displayed properly
 		frame.pack();
 		
+		//creates the player
 		BufferedImage playerIcon = ImageLoader.loadImage("player", ImageLoader.IMAGE_PNG_FORMAT_ID);
 		player = new Player(this, playerIcon, 20, 20);
 		
+		//creates and adds the key listener
 		input = new KeyInput(this, player);
 		frame.addKeyListener(input);
+		
+		//adds a listener to the frame to execute code if the x button on the frame is pressed
+		frame.addWindowListener(new WindowAdapter(){
+			public void windowClosing(WindowEvent e){
+				//calls the method to run all code that needs to execute before the game closes
+				closeGame();			
+			}
+		});
+		
+		//creates all the buffered images for the tile ids
+		GameVariables.initializeTiles();
+		//sets all tiles in the tile list to the default tile to begin
+		Tile.initializeTiles();
+		//calls the method where all tiles that are to be created will be
+		createTiles();
+	}
+	
+	//method runs before the game closes
+	private void closeGame(){
+		//saves the scores to the text file
+		scores.saveScores();
+	}
+	
+	//used to create all tiles in the game
+	private void createTiles(){
+		//creates a new wall tile using the stone texture
+		new WallTile(GameVariables.getStoneTileId());
 	}
 	
 	//starts the thread
