@@ -26,7 +26,7 @@ import tiles.types.WallTile;
 public class Game implements Runnable{
 	
 	//the maximum amount of frames per second the game can run at
-	private final int MAX_FPS = 60;
+	private final int MAX_FPS = 120;
 	//stores the amount of seconds that have passed since the last frame
 	private double gameTimeSeconds;
 	//stores the frames per second the game is running at
@@ -200,7 +200,7 @@ public class Game implements Runnable{
 	//used to create all tiles in the game
 	private void createTiles(){
 		//creates a new wall tile using the stone texture
-		new WallTile(GameVariables.getStoneTileId());
+		new WallTile(GameVariables.getStoneTileId());                
 	}
 	
 	//starts the thread

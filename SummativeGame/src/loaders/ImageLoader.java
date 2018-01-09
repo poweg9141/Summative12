@@ -1,7 +1,10 @@
 package loaders;
 
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 
@@ -28,7 +31,7 @@ public class ImageLoader {
 	public static BufferedImage loadImage(String file, int format){
 		//creates the string that will hold the fille path of the passed in  image
 		//puts in the textures folder directory and the file name passed in
-		String dir = "/textures/" + file;
+		String dir = "res/textures/" + file;
 		//adds the correct file extension based on the passed in format ID
 		if(format == IMAGE_JPEG_FORMAT_ID){
 			dir += ".jpeg";
@@ -44,7 +47,8 @@ public class ImageLoader {
 		
 		try {
 			//returns the loaded image at the specified file path
-			return ImageIO.read(ImageLoader.class.getResource(dir));
+			//return ImageIO.read(ImageLoader.class.getResource(dir));
+                    return ImageIO.read(new File(dir));
 		} catch (IOException e) {
 			//handles the error
 			DisplayManager.quitGameOnError(e, "Error Loading Image! File must be inside the "
@@ -53,4 +57,14 @@ public class ImageLoader {
 		//returns null to remove errors, effectively unreachable code
 		return null;
 	}
+        
+        public static BufferedImage test(){
+            try {
+                return ImageIO.read(new File("res/textures/player.png"));
+            } catch (IOException ex) {
+                Logger.getLogger(ImageLoader.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            System.out.println("error");
+            return null;
+        }            
 }

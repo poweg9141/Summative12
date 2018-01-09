@@ -1,5 +1,6 @@
 package coreEngine;
 
+import loaders.ImageLoader;
 import loaders.ScoreLoader;
 import screen.DisplayManager;
 import utils.Time;
