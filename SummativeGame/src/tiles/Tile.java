@@ -16,13 +16,14 @@ public class Tile {
 	//an array to store all the types of tile added into the game, tiles in the array are accessible using their renderable id
 	public static final Tile[] tiles = new Tile[GameVariables.getMaxGameTiles()];
 	//the standard width and height of a tile
-	private final int STANDARD_DIAMETER = 64;
+	protected final int STANDARD_DIAMETER = 64;
 	//a tiles texture and id it was created with
 	protected BufferedImage texture;
 	protected final int id;
 	//whether or not the tile will act as a solid object in the game
 	protected final boolean isSolid;
-	
+	//x and y of tile
+        protected int x, y;
 	/**
 	 * create a game tile
 	 * @param id the tiles id
@@ -37,13 +38,15 @@ public class Tile {
 		tiles[this.id] = this;
 	}
 	
-	//used to update the texture of the tie before it is rendered
+	//used to update the texture of the tile before it is rendered
 	public void update(){
 		
 	}
 	
 	//renders the tile to the screen
 	public void render(Graphics g, int x, int y){
+                this.x = x;
+                this.y = y;
 		g.drawImage(texture, x, y, STANDARD_DIAMETER, STANDARD_DIAMETER, null);
 	}
 	
