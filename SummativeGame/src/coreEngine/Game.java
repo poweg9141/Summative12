@@ -20,6 +20,7 @@ import loaders.ScoreLoader;
 import screen.DisplayManager;
 import screen.Window;
 import tiles.Tile;
+import tiles.types.FloorTile;
 import tiles.types.WallTile;
 /**
  * class to run the games thread and control game logic
@@ -65,6 +66,7 @@ public class Game implements Runnable{
 	private Player player;
         private Camera camera;
         private EnemyHandler enemies;
+        private Tile tile;
 	
 	/**
 	 * Constructor to create the game
@@ -89,6 +91,7 @@ public class Game implements Runnable{
 		input.update();
                 player.tick();
                 enemies.tick();
+                tile.setImage(Tile.tiles[Tile.returnRenderID(GameVariables.getRUBBLE_TILE_ID())].getImage());
 	}
 	
 	//method the render the game to the screen once updated
@@ -112,7 +115,7 @@ public class Game implements Runnable{
 		player.render(g);
                 enemies.render(g);
 		//renders a tile for testing
-		Tile.tiles[Tile.returnRenderID(GameVariables.getStoneTileId())].render(g, 100, 100);
+		tile.render(g, 100, 100);
 		//DRAWING ENDS HERE
 		
 		//display the buffers to the screen
@@ -216,7 +219,8 @@ public class Game implements Runnable{
 	//used to create all tiles in the game
 	private void createTiles(){
 		//creates a new wall tile using the stone texture
-		new WallTile(this, GameVariables.getStoneTileId());                
+		tile = new WallTile(this, GameVariables.getStoneTileId()); 
+                new FloorTile(this, GameVariables.getRUBBLE_TILE_ID());
 	}
 	
 	//starts the thread

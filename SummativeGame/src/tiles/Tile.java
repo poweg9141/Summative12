@@ -90,4 +90,16 @@ public class Tile {
         public int getY(){
             return y;
         }
+        
+        public void setImage(BufferedImage image){
+            this.texture = image;
+        }      
+        
+        public BufferedImage getImage(){
+            return this.texture;
+        }
+        
+        public Tile getTile(){
+            return this;
+        }            
 }
