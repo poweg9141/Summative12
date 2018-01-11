@@ -11,6 +11,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.JFrame;
 
 import entities.mobs.Player;
+import graphics.Flashlight;
 import input.KeyInput;
 import loaders.ImageLoader;
 import loaders.ScoreLoader;
@@ -60,7 +61,8 @@ public class Game implements Runnable{
 	
 	//stores the player
 	Player player;
-	
+        //stores the flashlight
+	Flashlight flashlight;
 	/**
 	 * Constructor to create the game
 	 * @param title the title to be displayed to the games JFrame
@@ -101,9 +103,13 @@ public class Game implements Runnable{
 		
 		//DRAWING BEGINS HERE
 		player.render(g);
+                
 		//renders a tile for testing
 		Tile.tiles[Tile.returnRenderID(GameVariables.getStoneTileId())].render(g, 100, 100);
-		//DRAWING ENDS HERE
+                
+		// places the flashlight filter overtop everything
+                flashlight.render(g);
+                //DRAWING ENDS HERE
 		
 		//display the buffers to the screen
 		bs.show();
@@ -171,6 +177,10 @@ public class Game implements Runnable{
 		BufferedImage playerIcon = ImageLoader.loadImage("player", ImageLoader.IMAGE_PNG_FORMAT_ID);
 		player = new Player(this, playerIcon, 20, 20);
 		
+                // creates the flashlight
+                BufferedImage flashlightIcon = ImageLoader.loadImage("back", ImageLoader.IMAGE_PNG_FORMAT_ID);
+                flashlight = new Flashlight(this, flashlightIcon, 20, 20, 1280, 1280);
+                
 		//creates and adds the key listener
 		input = new KeyInput(this, player);
 		frame.addKeyListener(input);
@@ -206,7 +216,7 @@ public class Game implements Runnable{
         
         // add the flashlight circle over everything else on the screen
         public void postProcessing(){
-            BufferedImage flashlight = ImageLoader.loadImage("flashlight", ImageLoader.IMAGE_PNG_FORMAT_ID);
+            
             // middle of circle should be where the player is at all times
             
         }

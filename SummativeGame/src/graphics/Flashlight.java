@@ -18,15 +18,13 @@ import loaders.ImageLoader;
  */
 public class Flashlight extends Entity{
     
-    BufferedImage light;
+    BufferedImage flashlight;
     private Game game;
     
-    public Flashlight(Game game, float x, float y, float width, float height, String dir, int imageType){
+    public Flashlight(Game game, BufferedImage img, float x, float y, float width, float height){
         super(x, y, GameVariables.getFlashlightDiameter(), GameVariables.getFlashlightDiameter());
-        light = ImageLoader.loadImage(dir, imageType);
         this.game = game;
     }
-
     
     @Override
     public void tick() {
@@ -35,6 +33,6 @@ public class Flashlight extends Entity{
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(light, (int)x, (int)y, width, height, null);
+        g.drawImage(flashlight, (int) x, (int) y, width, height, null);
     }
 }
