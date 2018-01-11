@@ -63,6 +63,7 @@ public class Game implements Runnable{
 	Player player;
         //stores the flashlight
 	Flashlight flashlight;
+        
 	/**
 	 * Constructor to create the game
 	 * @param title the title to be displayed to the games JFrame
