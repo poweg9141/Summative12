@@ -49,20 +49,16 @@ public class Camera {
     
     public void framePlayer(Player e, int frameSize){
         if(e.getX() >= game.getWidth() - frameSize && e.getXDisplacement() > 0){
-            xOff = e.getX() - (game.getWidth() / 2) + (e.getWidth() / 2) - (game.getWidth() / 2 - frameSize);
-            
+            xOff = e.getX() - (game.getWidth() / 2) + (e.getWidth() / 2) - (game.getWidth() / 2 - frameSize);            
         }            
         else if(e.getX() <= frameSize && e.getXDisplacement() < 0){
             xOff = e.getX() - (game.getWidth() / 2) + (e.getWidth() / 2) + (game.getWidth() / 2 - frameSize);
-            //xOff += e.getXDisplacement();
         }       
         if(e.getY() >= game.getHeight() - frameSize && e.getYDisplacement() > 0){
             yOff = e.getY() - (game.getHeight() / 2) + (e.getHeight() / 2) - (game.getHeight() / 2 - frameSize);
-            yOff += e.getYDisplacement();
         }           
         else if(e.getY() <= frameSize && e.getYDisplacement() < 0){
            yOff = e.getY() - (game.getHeight() / 2) + (e.getHeight() / 2) + (game.getHeight() / 2 - frameSize);
-           //yOff += e.getYDisplacement();
         }
     }
     

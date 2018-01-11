@@ -1,5 +1,6 @@
 package tiles;
 
+import coreEngine.Game;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
@@ -24,18 +25,20 @@ public class Tile {
 	protected final boolean isSolid;
 	//x and y of tile
         protected int x, y;
+        protected static Game game;
 	/**
 	 * create a game tile
 	 * @param id the tiles id
 	 * @param isSolid whether it is solid or not
 	 */
-	public Tile(int id, boolean isSolid){
+	public Tile(Game game, int id, boolean isSolid){
 		//gets the tiles buffered image texture from its id
 		texture = TileIdentifier.getTileImageFromID(id);
 		this.id = id - 9000;
 		this.isSolid = isSolid;		
 		//adds the created tile type to the list of tiles
 		tiles[this.id] = this;
+                this.game = game;
 	}
 	
 	//used to update the texture of the tile before it is rendered
@@ -47,13 +50,13 @@ public class Tile {
 	public void render(Graphics g, int x, int y){
                 this.x = x;
                 this.y = y;
-		g.drawImage(texture, x, y, STANDARD_DIAMETER, STANDARD_DIAMETER, null);
+		g.drawImage(texture, (int)(x + game.getCamera().getxOff()), (int)(y + game.getCamera().getyOff()), STANDARD_DIAMETER, STANDARD_DIAMETER, null);
 	}
 	
 	//adds the default tile to the list of tiles in every spot to prevent a call to a tile that does not exist
 	public static void initializeTiles(){
 		for(int i = 0; i < tiles.length; i++){
-			tiles[i] = new Tile(GameVariables.getDefaultTileId(), false);
+			tiles[i] = new Tile(game, GameVariables.getDefaultTileId(), false);
 		}
 	}
 	
@@ -75,4 +78,16 @@ public class Tile {
 	public int getId(){
 		return id;
 	}
+        
+        public int getStandardDiameter(){
+            return STANDARD_DIAMETER;            
+        }
+        
+        public int getX(){
+            return x;
+        }
+        
+        public int getY(){
+            return y;
+        }
 }

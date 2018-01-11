@@ -1,5 +1,6 @@
 package coreEngine;
 
+import entities.mobs.enemies.Enemy;
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -11,6 +12,8 @@ import java.awt.image.BufferedImage;
 import javax.swing.JFrame;
 
 import entities.mobs.Player;
+import entities.mobs.enemies.EnemyHandler;
+import graphics.Camera;
 import input.KeyInput;
 import loaders.ImageLoader;
 import loaders.ScoreLoader;
@@ -59,7 +62,9 @@ public class Game implements Runnable{
 	private ScoreLoader scores;
 	
 	//stores the player
-	Player player;
+	private Player player;
+        private Camera camera;
+        private EnemyHandler enemies;
 	
 	/**
 	 * Constructor to create the game
@@ -74,12 +79,16 @@ public class Game implements Runnable{
 		this.title = title;
 		this.manager = manager;
 		//initializes the score loader
-		scores = new ScoreLoader();
+		scores = new ScoreLoader();   
+                camera = new Camera(this, 0, 0);
+                enemies = new EnemyHandler();
 	}
 	
 	//method to update the game every frame before rendering
 	private void update(){		
 		input.update();
+                player.tick();
+                enemies.tick();
 	}
 	
 	//method the render the game to the screen once updated
@@ -101,6 +110,7 @@ public class Game implements Runnable{
 		
 		//DRAWING BEGINS HERE
 		player.render(g);
+                enemies.render(g);
 		//renders a tile for testing
 		Tile.tiles[Tile.returnRenderID(GameVariables.getStoneTileId())].render(g, 100, 100);
 		//DRAWING ENDS HERE
@@ -169,14 +179,20 @@ public class Game implements Runnable{
 		
 		//creates the player
 		BufferedImage playerIcon = ImageLoader.loadImage("player", ImageLoader.IMAGE_PNG_FORMAT_ID);
-		player = new Player(this, playerIcon, 20, 20);
-		
+		player = new Player(this, playerIcon, width / 2, height / 2);
+                
+                BufferedImage enemyIcon = ImageLoader.loadImage("back", ImageLoader.IMAGE_PNG_FORMAT_ID);
+                for(int i = 0; i < 5; i++){
+                    enemies.addEnemy(new Enemy(this, enemyIcon, 50 * i, 50 * i));
+                }
+                
 		//creates and adds the key listener
 		input = new KeyInput(this, player);
 		frame.addKeyListener(input);
 		
 		//adds a listener to the frame to execute code if the x button on the frame is pressed
 		frame.addWindowListener(new WindowAdapter(){
+                        @Override
 			public void windowClosing(WindowEvent e){
 				//calls the method to run all code that needs to execute before the game closes
 				closeGame();			
@@ -188,7 +204,7 @@ public class Game implements Runnable{
 		//sets all tiles in the tile list to the default tile to begin
 		Tile.initializeTiles();
 		//calls the method where all tiles that are to be created will be
-		createTiles();
+		createTiles();                                
 	}
 	
 	//method runs before the game closes
@@ -200,7 +216,7 @@ public class Game implements Runnable{
 	//used to create all tiles in the game
 	private void createTiles(){
 		//creates a new wall tile using the stone texture
-		new WallTile(GameVariables.getStoneTileId());                
+		new WallTile(this, GameVariables.getStoneTileId());                
 	}
 	
 	//starts the thread
@@ -249,4 +265,12 @@ public class Game implements Runnable{
 	public int getFPS(){
 		return fps;
 	}
+        
+        public Camera getCamera(){
+            return this.camera;
+        }
+        
+        public Player getPlayer(){
+            return player;
+        }
 }
