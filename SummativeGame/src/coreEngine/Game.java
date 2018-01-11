@@ -202,7 +202,17 @@ public class Game implements Runnable{
 		//creates a new wall tile using the stone texture
 		new WallTile(GameVariables.getStoneTileId());                
 	}
-	
+
+        
+        // add the flashlight circle over everything else on the screen
+        public void postProcessing(){
+            BufferedImage flashlight = ImageLoader.loadImage("flashlight", ImageLoader.IMAGE_PNG_FORMAT_ID);
+            // middle of circle should be where the player is at all times
+            
+        }
+        
+        
+        
 	//starts the thread
 	public synchronized void start(){
 		//if the game is already running, exit the method

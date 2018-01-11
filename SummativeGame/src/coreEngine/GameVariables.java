@@ -19,6 +19,8 @@ public class GameVariables {
 	//stores the default name and score for the high scores text file, used when creating a new file
 	//NOTE: default name must have NO spaces
 	private static final String defaultHighScoreName = "WendyWako";
+        
+        private static final int FlashlightDiameter = 1280;
 	
 	private static final int MAX_GAME_TILES = 64;
 	//VARIABLES BELOW ARE IDENTIFIERS AND FILE LOCATIONS FOR GANE TILES
@@ -121,4 +123,8 @@ public class GameVariables {
 	public static void setPlayerHeight(double playerHeight) {
 		GameVariables.playerHeight = playerHeight;
 	}
+
+    public static int getFlashlightDiameter() {
+        return FlashlightDiameter;
+    }   
 }
