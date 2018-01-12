@@ -60,7 +60,7 @@ public class ImageLoader {
         
         public static BufferedImage test(){
             try {
-                return ImageIO.read(new File("res/textures/player.png"));
+                return ImageIO.read(new File("res/textures/flashlight.png"));
             } catch (IOException ex) {
                 Logger.getLogger(ImageLoader.class.getName()).log(Level.SEVERE, null, ex);
             }

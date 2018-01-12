@@ -2,7 +2,6 @@ package entities.mobs;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-
 import coreEngine.Game;
 import graphics.Camera;
 

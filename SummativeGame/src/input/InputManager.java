@@ -2,6 +2,7 @@ package input;
 
 import coreEngine.Game;
 import coreEngine.GameVariables;
+import entities.mobs.Flashlight;
 import entities.mobs.Player;
 
 /**
@@ -15,15 +16,19 @@ public class InputManager {
 	private Game game;
 	//stores an instance of the player
 	private Player player;
+        //stores an instance of the flashlight
+        private Flashlight flashlight;
 	
 	/**
 	 * creates an input manager to manage inputs for a Game
 	 * @param game the game it will manage inputs for
 	 * @param player the player it will manage inputs for
+         * @param flashlight the flashlight it will manage inputs for
 	 */
-	public InputManager(Game game, Player player){
+	public InputManager(Game game, Player player, Flashlight flashlight){
 		this.game = game;
 		this.player = player;
+                this.flashlight = flashlight;
 	}
 	
 	/**
@@ -55,5 +60,7 @@ public class InputManager {
 		}
 		//calls the players move method and passed in the x and y displacements calculated above
 		player.move(x, y);
+                //calls the flashlights move method and moves so it is still perfectly centered around the player
+          //      flashlight.move(x,y);
 	}
 }

@@ -12,6 +12,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.JFrame;
 
 import entities.mobs.Player;
+import entities.mobs.Flashlight;
 import entities.mobs.enemies.EnemyHandler;
 import graphics.Camera;
 import input.KeyInput;
@@ -62,12 +63,16 @@ public class Game implements Runnable{
 	//used to manage the high scores for the game
 	private ScoreLoader scores;
 	
-	//stores the player
+        //stores the flashlight
+	Flashlight flashlight;
+        
+
 	private Player player;
         private Camera camera;
         private EnemyHandler enemies;
         private Tile tile;
 	
+
 	/**
 	 * Constructor to create the game
 	 * @param title the title to be displayed to the games JFrame
@@ -113,9 +118,14 @@ public class Game implements Runnable{
 		
 		//DRAWING BEGINS HERE
 		player.render(g);
+                
+      
+
                 enemies.render(g);
 		//renders a tile for testing
-		tile.render(g, 100, 100);
+		tile.render(g, 100, 100);		
+    // places the flashlight filter overtop everything
+    flashlight.render(g);
 		//DRAWING ENDS HERE
 		
 		//display the buffers to the screen
@@ -182,7 +192,12 @@ public class Game implements Runnable{
 		
 		//creates the player
 		BufferedImage playerIcon = ImageLoader.loadImage("player", ImageLoader.IMAGE_PNG_FORMAT_ID);
-		player = new Player(this, playerIcon, width / 2, height / 2);
+player = new Player(this, playerIcon, width / 2, height / 2);
+		
+                // creates the flashlight
+                BufferedImage flashlightIcon = ImageLoader.loadImage("flashlight", ImageLoader.IMAGE_PNG_FORMAT_ID);
+                flashlight = new Flashlight(this, flashlightIcon, player.getX()-608, player.getY()-608);
+		
                 
                 BufferedImage enemyIcon = ImageLoader.loadImage("back", ImageLoader.IMAGE_PNG_FORMAT_ID);
                 for(int i = 0; i < 5; i++){
@@ -190,7 +205,7 @@ public class Game implements Runnable{
                 }
                 
 		//creates and adds the key listener
-		input = new KeyInput(this, player);
+		input = new KeyInput(this, flashlight, player);
 		frame.addKeyListener(input);
 		
 		//adds a listener to the frame to execute code if the x button on the frame is pressed
@@ -222,7 +237,17 @@ public class Game implements Runnable{
 		tile = new WallTile(this, GameVariables.getStoneTileId()); 
                 new FloorTile(this, GameVariables.getRUBBLE_TILE_ID());
 	}
-	
+
+        
+        // add the flashlight circle over everything else on the screen
+        public void postProcessing(){
+            
+            // middle of circle should be where the player is at all times
+            
+        }
+        
+        
+        
 	//starts the thread
 	public synchronized void start(){
 		//if the game is already running, exit the method
@@ -269,11 +294,11 @@ public class Game implements Runnable{
 	public int getFPS(){
 		return fps;
 	}
-        
         public Camera getCamera(){
             return this.camera;
         }
         
+
         public Player getPlayer(){
             return player;
         }

@@ -15,12 +15,14 @@ public class GameVariables {
 	private static double playerWidth = 64;
 	private static double playerHeight = 64;
 	//the speed of a player
-	private static double playerSpeed = 0.002;
+	private static double playerSpeed = 0.02;
         //stores the speed of the enemies
         private static double entitySpeed = 0.001;
 	//stores the default name and score for the high scores text file, used when creating a new file
 	//NOTE: default name must have NO spaces
 	private static final String defaultHighScoreName = "WendyWako";
+        
+        private static final int FlashlightDiameter = 1280;
 	
 	private static final int MAX_GAME_TILES = 64;
 	//VARIABLES BELOW ARE IDENTIFIERS AND FILE LOCATIONS FOR GANE TILES
@@ -128,6 +130,10 @@ public class GameVariables {
 	public static void setPlayerHeight(double playerHeight) {
 		GameVariables.playerHeight = playerHeight;
 	}
+
+    public static int getFlashlightDiameter() {
+        return FlashlightDiameter;
+    }   
         
         public static double getEntitySpeed(){
             return entitySpeed;
