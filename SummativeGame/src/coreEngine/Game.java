@@ -125,7 +125,7 @@ public class Game implements Runnable{
 		//renders a tile for testing
 		tile.render(g, 100, 100);		
     // places the flashlight filter overtop everything
-    flashlight.render(g);
+   // flashlight.render(g);
 		//DRAWING ENDS HERE
 		
 		//display the buffers to the screen
