@@ -176,11 +176,11 @@ public class Game implements Runnable{
 		
 		//creates the player
 		BufferedImage playerIcon = ImageLoader.loadImage("player", ImageLoader.IMAGE_PNG_FORMAT_ID);
-		player = new Player(this, playerIcon, 20, 20);
+		player = new Player(this, playerIcon, 200, 200);
 		
                 // creates the flashlight
-                BufferedImage flashlightIcon = ImageLoader.loadImage("back", ImageLoader.IMAGE_PNG_FORMAT_ID);
-                flashlight = new Flashlight(this, flashlightIcon, 20, 20, 1280, 1280);
+                BufferedImage flashlightIcon = ImageLoader.loadImage("flashlight", ImageLoader.IMAGE_PNG_FORMAT_ID);
+                flashlight = new Flashlight(this, flashlightIcon, player.getX()-608, player.getY()-608, 1280, 1280);
                 
 		//creates and adds the key listener
 		input = new KeyInput(this, player);

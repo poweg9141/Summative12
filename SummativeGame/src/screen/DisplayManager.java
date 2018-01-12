@@ -44,6 +44,7 @@ public class DisplayManager {
 			game = new Game(this, ScreenVariables.getGameName(), 
 					ScreenVariables.getGameWidth(), ScreenVariables.getGameHeight());
 			game.start();
+                        //game.run();
 		}else{
 			
 		}

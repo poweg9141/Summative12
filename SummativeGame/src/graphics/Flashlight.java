@@ -7,10 +7,8 @@ package graphics;
 import coreEngine.Game;
 import coreEngine.GameVariables;
 import entities.Entity;
-import entities.mobs.Player;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import loaders.ImageLoader;
 
 /**
  *
@@ -21,9 +19,9 @@ public class Flashlight extends Entity{
     BufferedImage flashlight;
     private Game game;
     
-    public Flashlight(Game game, BufferedImage img, float x, float y, float width, float height){
+    public Flashlight(Game game, BufferedImage flashlight, float x, float y, float width, float height){
         super(x, y, GameVariables.getFlashlightDiameter(), GameVariables.getFlashlightDiameter());
-        this.game = game;
+        this.flashlight = flashlight;
     }
     
     @Override
