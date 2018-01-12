@@ -4,6 +4,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import coreEngine.Game;
+import entities.mobs.Flashlight;
 import entities.mobs.Player;
 
 /**
@@ -21,13 +22,14 @@ public class KeyInput implements KeyListener{
 	 * creates an input listener to listen for inputs from a Game
 	 * @param game the game it will listen for inputs from
 	 * @param player the player, or players it will listen for inputs for
+         * @param flashlight flashlight
 	 */
-	public KeyInput(Game game, Player... player){
+	public KeyInput(Game game, Flashlight flashlight, Player... player){
 		//initializes the key id array
 		keys = new boolean[256];
 		//creates an input manager for every player passed in
 		for(int i = 0; i < player.length; i++){
-			manager = new InputManager(game, player[i]);
+			manager = new InputManager(game, player[i], flashlight);
 		}
 	}
 	

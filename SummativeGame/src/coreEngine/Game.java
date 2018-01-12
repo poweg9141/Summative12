@@ -11,7 +11,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.JFrame;
 
 import entities.mobs.Player;
-import graphics.Flashlight;
+import entities.mobs.Flashlight;
 import input.KeyInput;
 import loaders.ImageLoader;
 import loaders.ScoreLoader;
@@ -180,10 +180,10 @@ public class Game implements Runnable{
 		
                 // creates the flashlight
                 BufferedImage flashlightIcon = ImageLoader.loadImage("flashlight", ImageLoader.IMAGE_PNG_FORMAT_ID);
-                flashlight = new Flashlight(this, flashlightIcon, player.getX()-608, player.getY()-608, 1280, 1280);
+                flashlight = new Flashlight(this, flashlightIcon, player.getX()-608, player.getY()-608);
                 
 		//creates and adds the key listener
-		input = new KeyInput(this, player);
+		input = new KeyInput(this, flashlight, player);
 		frame.addKeyListener(input);
 		
 		//adds a listener to the frame to execute code if the x button on the frame is pressed

@@ -2,7 +2,6 @@ package entities.mobs;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-
 import coreEngine.Game;
 
 /**
@@ -54,6 +53,7 @@ public class Player extends Mob{
 	 */
 	public void move(float dx, float dy){
 		//moves the player the passed in x and y displacements
-		super.move(dx, dy);		
+		super.move(dx, dy);
+                
 	}
 }
