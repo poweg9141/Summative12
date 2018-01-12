@@ -57,6 +57,8 @@ public class TextWriter {
 		//converts the error into a string
 		e.printStackTrace(pw);
 		String stackTrace = sw.toString();
+                //prints out the stack trace for the user
+                System.out.println(stackTrace);
 		//stores the date, from the Time class, into an array separated by spaces
 		String[] fullDateStamp = Time.getCurrentTimeStamp().split(" ");
 		//creates a string to store the reformatted date stamp

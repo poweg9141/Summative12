@@ -1,5 +1,7 @@
 package tiles.types;
 
+import coreEngine.Game;
+import entities.mobs.Player;
 import tiles.Tile;
 
 /**
@@ -10,11 +12,10 @@ import tiles.Tile;
 public class WallTile extends Tile{
 
 	/**
-	 * used ot create a tile that is solid
+	 * use it create a tile that is solid
 	 * @param id the id of the tile
 	 */
-	public WallTile(int id) {
-		super(id, true);
-	}
-
+	public WallTile(Game game, int id) {
+		super(game, id, true);
+	}            
 }

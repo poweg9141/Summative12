@@ -1,5 +1,6 @@
 package coreEngine;
 
+import entities.mobs.enemies.Enemy;
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -12,12 +13,15 @@ import javax.swing.JFrame;
 
 import entities.mobs.Player;
 import entities.mobs.Flashlight;
+import entities.mobs.enemies.EnemyHandler;
+import graphics.Camera;
 import input.KeyInput;
 import loaders.ImageLoader;
 import loaders.ScoreLoader;
 import screen.DisplayManager;
 import screen.Window;
 import tiles.Tile;
+import tiles.types.FloorTile;
 import tiles.types.WallTile;
 /**
  * class to run the games thread and control game logic
@@ -59,11 +63,16 @@ public class Game implements Runnable{
 	//used to manage the high scores for the game
 	private ScoreLoader scores;
 	
-	//stores the player
-	Player player;
         //stores the flashlight
 	Flashlight flashlight;
         
+
+	private Player player;
+        private Camera camera;
+        private EnemyHandler enemies;
+        private Tile tile;
+	
+
 	/**
 	 * Constructor to create the game
 	 * @param title the title to be displayed to the games JFrame
@@ -77,12 +86,17 @@ public class Game implements Runnable{
 		this.title = title;
 		this.manager = manager;
 		//initializes the score loader
-		scores = new ScoreLoader();
+		scores = new ScoreLoader();   
+                camera = new Camera(this, 0, 0);
+                enemies = new EnemyHandler();
 	}
 	
 	//method to update the game every frame before rendering
 	private void update(){		
 		input.update();
+                player.tick();
+                enemies.tick();
+                tile.setImage(Tile.tiles[Tile.returnRenderID(GameVariables.getRUBBLE_TILE_ID())].getImage());
 	}
 	
 	//method the render the game to the screen once updated
@@ -105,12 +119,14 @@ public class Game implements Runnable{
 		//DRAWING BEGINS HERE
 		player.render(g);
                 
+      
+
+                enemies.render(g);
 		//renders a tile for testing
-		Tile.tiles[Tile.returnRenderID(GameVariables.getStoneTileId())].render(g, 100, 100);
-                
-		// places the flashlight filter overtop everything
-                flashlight.render(g);
-                //DRAWING ENDS HERE
+		tile.render(g, 100, 100);		
+    // places the flashlight filter overtop everything
+    flashlight.render(g);
+		//DRAWING ENDS HERE
 		
 		//display the buffers to the screen
 		bs.show();
@@ -176,11 +192,17 @@ public class Game implements Runnable{
 		
 		//creates the player
 		BufferedImage playerIcon = ImageLoader.loadImage("player", ImageLoader.IMAGE_PNG_FORMAT_ID);
-		player = new Player(this, playerIcon, 200, 200);
+player = new Player(this, playerIcon, width / 2, height / 2);
 		
                 // creates the flashlight
                 BufferedImage flashlightIcon = ImageLoader.loadImage("flashlight", ImageLoader.IMAGE_PNG_FORMAT_ID);
                 flashlight = new Flashlight(this, flashlightIcon, player.getX()-608, player.getY()-608);
+		
+                
+                BufferedImage enemyIcon = ImageLoader.loadImage("back", ImageLoader.IMAGE_PNG_FORMAT_ID);
+                for(int i = 0; i < 5; i++){
+                    enemies.addEnemy(new Enemy(this, enemyIcon, 50 * i, 50 * i));
+                }
                 
 		//creates and adds the key listener
 		input = new KeyInput(this, flashlight, player);
@@ -188,6 +210,7 @@ public class Game implements Runnable{
 		
 		//adds a listener to the frame to execute code if the x button on the frame is pressed
 		frame.addWindowListener(new WindowAdapter(){
+                        @Override
 			public void windowClosing(WindowEvent e){
 				//calls the method to run all code that needs to execute before the game closes
 				closeGame();			
@@ -199,7 +222,7 @@ public class Game implements Runnable{
 		//sets all tiles in the tile list to the default tile to begin
 		Tile.initializeTiles();
 		//calls the method where all tiles that are to be created will be
-		createTiles();
+		createTiles();                                
 	}
 	
 	//method runs before the game closes
@@ -211,7 +234,8 @@ public class Game implements Runnable{
 	//used to create all tiles in the game
 	private void createTiles(){
 		//creates a new wall tile using the stone texture
-		new WallTile(GameVariables.getStoneTileId());                
+		tile = new WallTile(this, GameVariables.getStoneTileId()); 
+                new FloorTile(this, GameVariables.getRUBBLE_TILE_ID());
 	}
 
         
@@ -270,7 +294,11 @@ public class Game implements Runnable{
 	public int getFPS(){
 		return fps;
 	}
+        public Camera getCamera(){
+            return this.camera;
+        }
         
+
         public Player getPlayer(){
             return player;
         }
