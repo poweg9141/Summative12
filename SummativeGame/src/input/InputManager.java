@@ -61,6 +61,6 @@ public class InputManager {
 		//calls the players move method and passed in the x and y displacements calculated above
 		player.move(x, y);
                 //calls the flashlights move method and moves so it is still perfectly centered around the player
-                flashlight.move(x,y);
+          //      flashlight.move(x,y);
 	}
 }

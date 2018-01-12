@@ -270,4 +270,8 @@ public class Game implements Runnable{
 	public int getFPS(){
 		return fps;
 	}
+        
+        public Player getPlayer(){
+            return player;
+        }
 }
