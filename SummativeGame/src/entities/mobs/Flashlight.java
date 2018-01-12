@@ -19,7 +19,7 @@ public class Flashlight extends Mob{
     private Game game;
     
     public Flashlight(Game game, BufferedImage flashlight, float x, float y){
-        super(x, y, GameVariables.getFlashlightDiameter(), GameVariables.getFlashlightDiameter());
+        super(game, x, y, GameVariables.getFlashlightDiameter(), GameVariables.getFlashlightDiameter());
         this.flashlight = flashlight;
     }
     

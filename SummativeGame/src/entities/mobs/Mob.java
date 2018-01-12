@@ -1,5 +1,6 @@
 package entities.mobs;
 
+import coreEngine.Game;
 import entities.Entity;
 /**
  * is anything in that game that has the ability to move or change form
@@ -26,8 +27,8 @@ public abstract class Mob extends Entity{
 	 * @param width the width of the mob
 	 * @param height the height of the mob
 	 */
-	public Mob(float x, float y, int width, int height) {
-		super(x, y, width, height);
+	public Mob(Game game, float x, float y, int width, int height) {
+		super(game, x, y, width, height);
 		health = STANDARD_HEALTH;
 		speed = STANDARD_SPEED;
 	}
