@@ -51,7 +51,13 @@ public class World {
     }
     
     public Tile getTileAtPosition(int x, int y){
-        Tile t = Tile.tiles[Tile.returnRenderID(world[x][y])];
+        Tile t = Tile.tiles[Tile.returnRenderID(GameVariables.getGrassTileId())];
+        if(!(x < 0) || !(y < 0) || !(x >= tileWidth) || !(y >= tileHeight))           
+            try{
+                t = Tile.tiles[Tile.returnRenderID(world[x][y])];
+            }catch(ArrayIndexOutOfBoundsException e){
+                t = Tile.tiles[Tile.returnRenderID(GameVariables.getGrassTileId())];
+            }
         if(t == null)                  
             t = Tile.tiles[Tile.returnRenderID(GameVariables.getDefaultTileId())];
         return t;

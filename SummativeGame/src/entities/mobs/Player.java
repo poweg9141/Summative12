@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import coreEngine.Game;
 import graphics.Camera;
+import java.awt.Color;
 
 /**
  * the player
@@ -31,6 +32,7 @@ public class Player extends Mob {
         super(game, x, y, Mob.STANDARD_DIAMETER, Mob.STANDARD_DIAMETER);
         this.player = player;
         this.game = game;
+        bounds.setBounds(24, 45, 14, 19);
     }
 
     /*
@@ -53,7 +55,10 @@ public class Player extends Mob {
     @Override
     public void render(Graphics g) {
         //draws the player image on the screen
-        g.drawImage(player, (int) (x + game.getCamera().getxOff()), (int) (y + game.getCamera().getyOff()), width, height, null);       
+        g.drawImage(player, (int) (x + game.getCamera().getxOff()), (int) (y + game.getCamera().getyOff()), width, height, null);
+        g.setColor(Color.red);
+        g.fillRect((int) (x + bounds.x + game.getCamera().getxOff()), (int) (y + bounds.y + game.getCamera().getyOff()), 
+                bounds.width, bounds.height);
     }
 
     /*
