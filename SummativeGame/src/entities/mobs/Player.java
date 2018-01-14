@@ -42,7 +42,7 @@ public class Player extends Mob {
     @Override
     public void tick() {
         if (!isDead()) {
-            game.getCamera().centreEntity(this);
+            game.getCamera().framEntity(this);
         }else{
             handleDeath();
         }
