@@ -21,6 +21,7 @@ public class Flashlight extends Mob{
     public Flashlight(Game game, BufferedImage flashlight, float x, float y){
         super(game, x, y, GameVariables.getFlashlightDiameter(), GameVariables.getFlashlightDiameter());
         this.flashlight = flashlight;
+        this.game = game;
     }
     
     @Override
@@ -30,12 +31,7 @@ public class Flashlight extends Mob{
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(flashlight, (int) x, (int) y, width, height, null);
+        g.drawImage(flashlight, (int) (game.getPlayer().getX() - 608 + game.getCamera().getxOff()), (int) (game.getPlayer().getY() - 608 + game.getCamera().getyOff()), width, height, null);
     }
-    
-    public void move(float dx, float dy){
-		//moves the player the passed in x and y displacements
-	//	super.move(dx, dy);		
-	}
     
 }
