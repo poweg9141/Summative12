@@ -56,9 +56,6 @@ public class Player extends Mob {
     public void render(Graphics g) {
         //draws the player image on the screen
         g.drawImage(player, (int) (x + game.getCamera().getxOff()), (int) (y + game.getCamera().getyOff()), width, height, null);
-        g.setColor(Color.red);
-        g.fillRect((int) (x + bounds.x + game.getCamera().getxOff()), (int) (y + bounds.y + game.getCamera().getyOff()), 
-                bounds.width, bounds.height);
     }
 
     /*
