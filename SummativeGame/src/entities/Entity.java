@@ -2,6 +2,7 @@ package entities;
 
 import coreEngine.Game;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 /**
  * anything in that game that isnt just an image
@@ -17,6 +18,7 @@ public abstract class Entity {
     protected float x, y;
     //the entitys width and height
     protected int width, height;
+    protected Rectangle bounds;
 
     /**
      * creates an entity
@@ -32,6 +34,8 @@ public abstract class Entity {
         this.y = y;
         this.width = width;
         this.height = height;
+        
+        bounds = new Rectangle(0, 0, width, height);
     }
 
     /**

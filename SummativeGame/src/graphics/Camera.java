@@ -6,6 +6,7 @@
 package graphics;
 
 import coreEngine.Game;
+import coreEngine.GameVariables;
 import entities.Entity;
 import entities.mobs.Player;
 import tiles.Tile;
@@ -47,19 +48,20 @@ public class Camera {
         yOff = e.getY() - (game.getHeight() / 2) + (e.getHeight() / 2);
     }
     
-    public void framePlayer(Player e, int frameSize){
-        if(e.getX() >= game.getWidth() - frameSize && e.getXDisplacement() > 0){
-            xOff = e.getX() - (game.getWidth() / 2) + (e.getWidth() / 2) - (game.getWidth() / 2 - frameSize);            
-        }            
-        else if(e.getX() <= frameSize && e.getXDisplacement() < 0){
-            xOff = e.getX() - (game.getWidth() / 2) + (e.getWidth() / 2) + (game.getWidth() / 2 - frameSize);
-        }       
-        if(e.getY() >= game.getHeight() - frameSize && e.getYDisplacement() > 0){
-            yOff = e.getY() - (game.getHeight() / 2) + (e.getHeight() / 2) - (game.getHeight() / 2 - frameSize);
-        }           
-        else if(e.getY() <= frameSize && e.getYDisplacement() < 0){
-           yOff = e.getY() - (game.getHeight() / 2) + (e.getHeight() / 2) + (game.getHeight() / 2 - frameSize);
-        }
+    public void framEntity(Entity e){
+        xOff = e.getX() - (game.getWidth() / 2) + (e.getWidth() / 2);
+        yOff = e.getY() - (game.getHeight() / 2) + (e.getHeight() / 2);
+        
+        if(xOff < 0)
+            xOff = 0;
+        else if(xOff > game.getWorld().getTileWidth() * GameVariables.getSTANDARD_TILE_DIAMETER() - game.getWidth() &&
+                game.getWorld().getTileWidth() * GameVariables.getSTANDARD_TILE_DIAMETER() > game.getWidth())
+            xOff = game.getWorld().getTileWidth() * GameVariables.getSTANDARD_TILE_DIAMETER() - game.getWidth();
+        if(yOff < 0)
+            yOff = 0;
+        else if(yOff > game.getWorld().getTileHeight() * GameVariables.getSTANDARD_TILE_DIAMETER() - game.getHeight() &&
+                game.getWorld().getTileHeight() * GameVariables.getSTANDARD_TILE_DIAMETER() > game.getHeight())
+            yOff = game.getWorld().getTileHeight() * GameVariables.getSTANDARD_TILE_DIAMETER() - game.getHeight();
     }
     
     public void centreTile(Tile t){
