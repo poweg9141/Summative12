@@ -31,8 +31,9 @@ public class World {
         System.out.println(tileHeight);
         for(int y = 0; y < tileHeight; y++){
             for(int x = 0; x < tileWidth; x++){
-                System.out.println(world[x][y]);
+                System.out.print(world[x][y] + "    ");
             }
+            System.out.println();
         }
         */
     }
@@ -42,8 +43,8 @@ public class World {
     }
     
     public void render(Graphics g){        
-        for(int y = 0; y < tileWidth; y++){
-            for(int x = 0; x < tileHeight; x++){
+        for(int y = 0; y < tileHeight; y++){
+            for(int x = 0; x < tileWidth; x++){
                 Tile.tiles[Tile.returnRenderID(world[x][y])].render(g, x * GameVariables.getSTANDARD_TILE_DIAMETER(), 
                         y * GameVariables.getSTANDARD_TILE_DIAMETER());
             }

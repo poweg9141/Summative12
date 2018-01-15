@@ -15,7 +15,7 @@ public class GameVariables {
 	private static double playerWidth = 64;
 	private static double playerHeight = 64;
 	//the speed of a player
-	private static double playerSpeed = 0.02;
+	private static double playerSpeed = 0.2;
         //stores the speed of the enemies
         private static double entitySpeed = 0.001;
 	//stores the default name and score for the high scores text file, used when creating a new file
