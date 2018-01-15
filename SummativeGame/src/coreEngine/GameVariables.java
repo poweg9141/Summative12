@@ -25,6 +25,7 @@ public class GameVariables {
         private static final int FlashlightDiameter = 1280;
 	
 	private static final int MAX_GAME_TILES = 64;
+        private static final int STANDARD_TILE_DIAMETER = 64;
 	//VARIABLES BELOW ARE IDENTIFIERS AND FILE LOCATIONS FOR GANE TILES
 	//NOTE: All tile id's must start with 9, and start at 9000
 	private static final int DEFAULT_TILE_ID = 9000;
@@ -166,4 +167,8 @@ public class GameVariables {
     public static BufferedImage getRUBBLE_TILE() {
         return RUBBLE_TILE;
     }    
+
+    public static int getSTANDARD_TILE_DIAMETER() {
+        return STANDARD_TILE_DIAMETER;
+    }
 }

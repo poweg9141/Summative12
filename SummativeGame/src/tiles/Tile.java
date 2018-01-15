@@ -17,7 +17,7 @@ public class Tile {
 	//an array to store all the types of tile added into the game, tiles in the array are accessible using their renderable id
 	public static final Tile[] tiles = new Tile[GameVariables.getMaxGameTiles()];
 	//the standard width and height of a tile
-	protected final int STANDARD_DIAMETER = 64;
+	protected final int STANDARD_DIAMETER = GameVariables.getSTANDARD_TILE_DIAMETER();
 	//a tiles texture and id it was created with
 	protected BufferedImage texture;
 	protected final int id;
