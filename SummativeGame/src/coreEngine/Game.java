@@ -92,7 +92,7 @@ public class Game implements Runnable {
         scores = new ScoreLoader();
         camera = new Camera(this, 0, 0);
         enemies = new EnemyHandler();
-        world = new World("world");
+        world = new World("LevelTwo");
     }
 
     //method to update the game every frame before rendering
@@ -125,11 +125,10 @@ public class Game implements Runnable {
         world.render(g);
 
         //enemies.render(g);
-        //renders a tile for testing
-        //tile.render(g, 100, 100);		
+        		
         player.render(g);
         // places the flashlight filter overtop everything
-        // flashlight.render(g);
+        //flashlight.render(g);
         //DRAWING ENDS HERE
 
         //display the buffers to the screen
