@@ -9,7 +9,7 @@ public class ScreenVariables {
 
 	//stores the variables for the game window
 	private static String gameName = "Game";
-	private static int gameWidth = 700, gameHeight = 600;
+	private static int gameWidth = 700, gameHeight = 500;
 	
 	//stores the variables for the launcher window
 	private static String launcherName  = "";
