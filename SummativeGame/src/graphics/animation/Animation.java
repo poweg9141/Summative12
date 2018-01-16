@@ -5,6 +5,7 @@
 package graphics.animation;
 
 import graphics.SpriteSheet;
+import java.awt.image.BufferedImage;
 
 /**
  *
@@ -23,6 +24,6 @@ public class Animation {
     
     public BufferedImage getImageAtTime(long time){
         long newTime = startTime - time;
-        
+        return null;
     }
 }

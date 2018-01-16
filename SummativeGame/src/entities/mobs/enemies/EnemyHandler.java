@@ -4,9 +4,15 @@
  */
 package entities.mobs.enemies;
 
+import coreEngine.Game;
+import coreEngine.GameVariables;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 
 /**
  *
@@ -14,17 +20,28 @@ import java.util.List;
  */
 public class EnemyHandler {
     
-    private List<Enemy> enemies;
+    private Game game;
     
-    public EnemyHandler(){
-        enemies = new ArrayList<Enemy>();
+    private List<Enemy> enemies;
+    private int caughtEnemies;
+    
+    public EnemyHandler(Game game){
+        this.game = game;
+        enemies = new ArrayList<Enemy>();        
+        caughtEnemies = 0;
     }
     
     public void tick(){
         if(enemies.isEmpty())
             return;
-        for(Enemy e : enemies){
+        Iterator<Enemy> it = enemies.iterator();
+        while(it.hasNext()){
+            Enemy e = it.next();
             e.tick();
+            if(e.isCaught()){
+                it.remove();
+                caughtEnemies++;
+            }
         }
     }
     
@@ -39,14 +56,47 @@ public class EnemyHandler {
     }
     
     public void removeEnemy(Enemy e){
-        enemies.remove(e);
+            enemies.remove(e);       
+    }        
+    
+    public int getCaughtEnemies(){
+        return caughtEnemies;
     }
     
-    public void removeEnemy(float x, float y){
-        for(Enemy e : enemies){
-            if(e.getX() == x && e.getY() == y){
-                enemies.remove(e);
+    public void createRunningEnemies(BufferedImage texture, int num){
+       //testing to find error
+        // game.getWorld();
+        int toRender = num;
+        for(int y = game.getWorld().getTileHeight(); y > 0; y--){
+            for(int x = game.getWorld().getTileWidth(); x > 0; x--){
+                if(toRender == 0){
+                    return;
+                }
+                if(!game.getWorld().getTileAtPosition(x, y).isSolid()){
+                    Enemy e = new Enemy(game, texture, 
+                            x * GameVariables.getSTANDARD_TILE_DIAMETER(),
+                            y * GameVariables.getSTANDARD_TILE_DIAMETER());
+                    enemies.add(e);
+                    toRender--;
+                }
             }
+        }
+    }
+    
+    public void createHuntingEnemies(BufferedImage texture, int num){
+        Random rand = new Random();
+        for(int i = 0; i < num; i++){
+            int x = 0;
+            int y = 0;
+            do{
+                x = rand.nextInt(game.getWorld().getTileWidth());
+                y = rand.nextInt(game.getWorld().getTileHeight());
+            }while(game.getWorld().getTileAtPosition(x, y).isSolid());
+            
+            Enemy e = new Enemy(game, texture, x * GameVariables.getSTANDARD_TILE_DIAMETER(), 
+                    y * GameVariables.getSTANDARD_TILE_DIAMETER());
+            e.setRunning(false);
+            enemies.add(e);            
         }
     }
 }

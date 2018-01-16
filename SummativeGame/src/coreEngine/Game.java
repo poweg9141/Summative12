@@ -90,9 +90,9 @@ public class Game implements Runnable {
         this.manager = manager;
         //initializes the score loader
         scores = new ScoreLoader();
-        camera = new Camera(this, 0, 0);
-        enemies = new EnemyHandler();
+        camera = new Camera(this, 0, 0);       
         world = new World("world");
+         enemies = new EnemyHandler(this);
     }
 
     //method to update the game every frame before rendering
@@ -124,7 +124,7 @@ public class Game implements Runnable {
         //DRAWING BEGINS HERE	
         world.render(g);
 
-        //enemies.render(g);
+        enemies.render(g);
         //renders a tile for testing
         //tile.render(g, 100, 100);		
         player.render(g);
@@ -203,9 +203,7 @@ public class Game implements Runnable {
         flashlight = new Flashlight(this, flashlightIcon, player.getX() - 608, player.getY() - 608);
 
         BufferedImage enemyIcon = ImageLoader.loadImage("back", ImageLoader.IMAGE_PNG_FORMAT_ID);
-        for (int i = 0; i < 5; i++) {
-            enemies.addEnemy(new Enemy(this, enemyIcon, 50 * i, 50 * i));
-        }
+       enemies.createRunningEnemies(enemyIcon, 2);
 
         //creates and adds the key listener
         input = new KeyInput(this, flashlight, player);
@@ -312,5 +310,9 @@ public class Game implements Runnable {
 
     public World getWorld() {
         return world;
+    }
+    
+    public EnemyHandler getEnemyHandler(){
+        return enemies;
     }
 }
