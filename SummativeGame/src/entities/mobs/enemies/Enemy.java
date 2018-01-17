@@ -42,14 +42,14 @@ public class Enemy extends Mob {
         float py = game.getPlayer().getY();
         double dx = 0;
         double dy = 0;
-        if (px < x) {
+        if (px <= x) {
             dx = -(GameVariables.getEntitySpeed() * game.getGameTimeSeconds());
-        } else if (px > x) {
+        } else if (px >= x) {
             dx = (GameVariables.getEntitySpeed() * game.getGameTimeSeconds());
         }
-        if (py < y) {
+        if (py <= y) {
             dy = -(GameVariables.getEntitySpeed() * game.getGameTimeSeconds());
-        } else if (py > y) {
+        } else if (py >= y) {
             dy = (GameVariables.getEntitySpeed() * game.getGameTimeSeconds());
         }
         if (running) {

@@ -17,5 +17,10 @@ public class WallTile extends Tile{
 	 */
 	public WallTile(Game game, int id) {
 		super(game, id, true);
-	}            
+	}     
+        
+        @Override
+        public boolean isSolid(){
+            return true;
+        }
 }

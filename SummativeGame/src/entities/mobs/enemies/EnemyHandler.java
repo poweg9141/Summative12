@@ -64,11 +64,9 @@ public class EnemyHandler {
     }
     
     public void createRunningEnemies(BufferedImage texture, int num){
-       //testing to find error
-        // game.getWorld();
         int toRender = num;
-        for(int y = game.getWorld().getTileHeight(); y > 0; y--){
-            for(int x = game.getWorld().getTileWidth(); x > 0; x--){
+        for(int y = game.getWorld().getTileHeight() - 1; y > 0; y--){
+            for(int x = game.getWorld().getTileWidth() - 1; x > 0; x--){
                 if(toRender == 0){
                     return;
                 }
@@ -84,19 +82,21 @@ public class EnemyHandler {
     }
     
     public void createHuntingEnemies(BufferedImage texture, int num){
-        Random rand = new Random();
-        for(int i = 0; i < num; i++){
-            int x = 0;
-            int y = 0;
-            do{
-                x = rand.nextInt(game.getWorld().getTileWidth());
-                y = rand.nextInt(game.getWorld().getTileHeight());
-            }while(game.getWorld().getTileAtPosition(x, y).isSolid());
-            
-            Enemy e = new Enemy(game, texture, x * GameVariables.getSTANDARD_TILE_DIAMETER(), 
-                    y * GameVariables.getSTANDARD_TILE_DIAMETER());
-            e.setRunning(false);
-            enemies.add(e);            
+        int toRender = num;
+        for(int y = game.getWorld().getTileHeight() - 1; y > 0; y--){
+            for(int x = game.getWorld().getTileWidth() - 1; x > 0; x--){
+                if(toRender == 0){
+                    return;
+                }
+                if(!game.getWorld().getTileAtPosition(x, y).isSolid()){
+                    Enemy e = new Enemy(game, texture, 
+                            x * GameVariables.getSTANDARD_TILE_DIAMETER(),
+                            y * GameVariables.getSTANDARD_TILE_DIAMETER());
+                    e.setRunning(false);
+                    enemies.add(e);                    
+                    toRender--;
+                }
+            }
         }
     }
 }

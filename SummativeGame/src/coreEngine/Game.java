@@ -200,10 +200,7 @@ public class Game implements Runnable {
 
         // creates the flashlight
         BufferedImage flashlightIcon = ImageLoader.loadImage("flashlight", ImageLoader.IMAGE_PNG_FORMAT_ID);
-        flashlight = new Flashlight(this, flashlightIcon, player.getX() - 608, player.getY() - 608);
-
-        BufferedImage enemyIcon = ImageLoader.loadImage("back", ImageLoader.IMAGE_PNG_FORMAT_ID);
-       enemies.createRunningEnemies(enemyIcon, 2);
+        flashlight = new Flashlight(this, flashlightIcon, player.getX() - 608, player.getY() - 608);       
 
         //creates and adds the key listener
         input = new KeyInput(this, flashlight, player);
@@ -224,6 +221,10 @@ public class Game implements Runnable {
         Tile.initializeTiles();
         //calls the method where all tiles that are to be created will be
         createTiles();
+        
+        
+        BufferedImage enemyIcon = ImageLoader.loadImage("back", ImageLoader.IMAGE_PNG_FORMAT_ID);
+       enemies.createHuntingEnemies(enemyIcon, 2);
     }
 
     //method runs before the game closes
