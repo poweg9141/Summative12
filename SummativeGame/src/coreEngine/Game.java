@@ -92,7 +92,7 @@ public class Game implements Runnable {
         scores = new ScoreLoader();
         camera = new Camera(this, 0, 0);
         enemies = new EnemyHandler();
-        world = new World("LevelTwo");
+        world = new World("LevelZero");
     }
 
     //method to update the game every frame before rendering
