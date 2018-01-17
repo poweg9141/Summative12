@@ -89,9 +89,9 @@ public class Game implements Runnable {
         this.manager = manager;
         //initializes the score loader
         scores = new ScoreLoader();
-        camera = new Camera(this, 0, 0);       
-        world = new World("LevelTwo");
-      enemies = new EnemyHandler(this);
+        camera = new Camera(this, 0, 0);
+        world = new World(GameVariables.getLevelFile());
+        enemies = new EnemyHandler(this);
     }
 
     //method to update the game every frame before rendering
@@ -122,11 +122,13 @@ public class Game implements Runnable {
 
         //DRAWING BEGINS HERE	
         world.render(g);
-        enemies.render(g);	
+        enemies.render(g);
 
         player.render(g);
         // places the flashlight filter overtop everything
-        //flashlight.render(g);
+        if (GameVariables.isIsNight()) {
+            flashlight.render(g);
+        }
         //DRAWING ENDS HERE
 
         //display the buffers to the screen
@@ -197,7 +199,7 @@ public class Game implements Runnable {
 
         // creates the flashlight
         BufferedImage flashlightIcon = ImageLoader.loadImage("flashlight", ImageLoader.IMAGE_PNG_FORMAT_ID);
-        flashlight = new Flashlight(this, flashlightIcon, player.getX() - 608, player.getY() - 608);       
+        flashlight = new Flashlight(this, flashlightIcon, player.getX() - 608, player.getY() - 608);
 
         //creates and adds the key listener
         input = new KeyInput(this, flashlight, player);
@@ -218,9 +220,11 @@ public class Game implements Runnable {
         Tile.initializeTiles();
         //calls the method where all tiles that are to be created will be
         createTiles();
-        
-        BufferedImage enemyIcon = ImageLoader.loadImage("back", ImageLoader.IMAGE_PNG_FORMAT_ID);
-       enemies.createHuntingEnemies(enemyIcon, 2);
+
+        BufferedImage runnerIcon = ImageLoader.loadImage("npcs/runner", ImageLoader.IMAGE_PNG_FORMAT_ID);
+        BufferedImage hunterIcon = ImageLoader.loadImage("npcs/hunter", ImageLoader.IMAGE_PNG_FORMAT_ID);
+        enemies.createRunningEnemies(runnerIcon, GameVariables.getRunnersToRender());
+        enemies.createHuntingEnemies(hunterIcon, GameVariables.getHuntersToRender());
     }
 
     //method runs before the game closes
@@ -308,8 +312,8 @@ public class Game implements Runnable {
     public World getWorld() {
         return world;
     }
-    
-    public EnemyHandler getEnemyHandler(){
+
+    public EnemyHandler getEnemyHandler() {
         return enemies;
     }
 }

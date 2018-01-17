@@ -8,7 +8,7 @@ package screen;
 public class ScreenVariables {
 
 	//stores the variables for the game window
-	private static final String gameName = "Game";
+	private static final String gameName = "Hide n' Seek";
 	private static int gameWidth = 700, gameHeight = 500;
 	
 	//stores the variables for the launcher window
@@ -16,8 +16,8 @@ public class ScreenVariables {
 	private static final int launcherWidth = 200, launcherHeight = 180;
 	
 	//stores the variables for the game options window
-	private static final String optionsName = "Game Options";
-	private static final int optionsWidth = 900, optionsHeight = 600;
+	private static final String optionsName = "";
+	private static final int optionsWidth = 180, optionsHeight = 300;
 	
 	//stores the variables for the settings window
 	private static final String settingsName = "Settings";

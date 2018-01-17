@@ -64,6 +64,8 @@ public class EnemyHandler {
     }
     
     public void createRunningEnemies(BufferedImage texture, int num){
+        if(num == 0)
+            return;
         int toRender = num;
         for(int y = game.getWorld().getTileHeight() - 1; y > 0; y--){
             for(int x = game.getWorld().getTileWidth() - 1; x > 0; x--){
@@ -82,6 +84,8 @@ public class EnemyHandler {
     }
     
     public void createHuntingEnemies(BufferedImage texture, int num){
+        if(num == 0)
+            return;
         int toRender = num;
         for(int y = game.getWorld().getTileHeight() - 1; y > 0; y--){
             for(int x = game.getWorld().getTileWidth() - 1; x > 0; x--){

@@ -15,14 +15,21 @@ public class GameVariables {
 	private static double playerWidth = 64;
 	private static double playerHeight = 64;
 	//the speed of a player
-	private static double playerSpeed = 0.2;
+	private static double playerSpeed = 0.01;
         //stores the speed of the enemies
-        private static double entitySpeed = 0.1;
+        private static double entitySpeed = 0.01;
 	//stores the default name and score for the high scores text file, used when creating a new file
 	//NOTE: default name must have NO spaces
 	private static final String defaultHighScoreName = "WendyWako";
         
         private static final int FlashlightDiameter = 1280;
+        
+        private static String levelFile = "LevelZero";
+        
+        private static boolean isNight = true;
+        
+        private static int runnersToRender = 6;
+        private static int huntersToRender = 2;
 	
 	private static final int MAX_GAME_TILES = 64;
         private static final int STANDARD_TILE_DIAMETER = 64;
@@ -170,5 +177,37 @@ public class GameVariables {
 
     public static int getSTANDARD_TILE_DIAMETER() {
         return STANDARD_TILE_DIAMETER;
+    }
+
+    public static String getLevelFile() {
+        return levelFile;
+    }
+
+    public static void setLevelFile(String levelFile) {
+        GameVariables.levelFile = levelFile;
+    }
+
+    public static boolean isIsNight() {
+        return isNight;
+    }
+
+    public static void setIsNight(boolean isNight) {
+        GameVariables.isNight = isNight;
+    }
+
+    public static int getRunnersToRender() {
+        return runnersToRender;
+    }
+
+    public static void setRunnersToRender(int runnersToRender) {
+        GameVariables.runnersToRender = runnersToRender;
+    }
+
+    public static int getHuntersToRender() {
+        return huntersToRender;
+    }
+
+    public static void setHuntersToRender(int huntersToRender) {
+        GameVariables.huntersToRender = huntersToRender;
     }
 }
