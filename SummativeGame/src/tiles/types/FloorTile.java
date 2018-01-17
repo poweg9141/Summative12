@@ -47,4 +47,9 @@ public class FloorTile extends Tile{
     public void setDamageDealtPerSecond(int damageDealtPerSecond) {
         this.damageDealtPerSecond = damageDealtPerSecond;
     }
+    
+    @Override
+    public boolean isSolid(){
+        return false;
+    }
 }

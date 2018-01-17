@@ -31,8 +31,9 @@ public class World {
         System.out.println(tileHeight);
         for(int y = 0; y < tileHeight; y++){
             for(int x = 0; x < tileWidth; x++){
-                System.out.println(world[x][y]);
+                System.out.print(world[x][y] + "    ");
             }
+            System.out.println();
         }
         */
     }

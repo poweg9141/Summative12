@@ -35,7 +35,7 @@ public class Tile {
 		//gets the tiles buffered image texture from its id
 		texture = TileIdentifier.getTileImageFromID(id);
 		this.id = id - 9000;
-		this.isSolid = isSolid;		
+		this.isSolid = isSolid;	
 		//adds the created tile type to the list of tiles
 		tiles[this.id] = this;
                 this.game = game;
@@ -72,8 +72,8 @@ public class Tile {
 	 * @return true is solid, false if not
 	 */
 	public boolean isSolid(){
-		return isSolid;
-	}
+            return isSolid;
+        }
 	
 	public int getId(){
 		return id;
