@@ -33,5 +33,4 @@ public class Flashlight extends Mob{
     public void render(Graphics g) {
         g.drawImage(flashlight, (int) (game.getPlayer().getX() - 608 + game.getCamera().getxOff()), (int) (game.getPlayer().getY() - 608 + game.getCamera().getyOff()), width, height, null);
     }
-    
 }
