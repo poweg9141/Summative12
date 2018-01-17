@@ -70,6 +70,12 @@ public class Launcher{
 		//creates the options button
 		options = new JButton("GAME OPTIONS");
 		options.setToolTipText("Edit options for in game play like map, day/night, etc.");
+                options.addActionListener(new ActionListener(){
+                   public void actionPerformed(ActionEvent e){
+                       frameVisibility(false);
+                       manager.openOptions();
+                   } 
+                });
 		frame.add(options);
 		
 		//creates the settings button
@@ -93,7 +99,7 @@ public class Launcher{
 		frame.setVisible(true);
 	}
 	
-	private void frameVisibility(boolean visible){
+	public void frameVisibility(boolean visible){
 		frame.setVisible(visible);
 	}
 }

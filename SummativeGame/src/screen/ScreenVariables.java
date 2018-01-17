@@ -8,23 +8,24 @@ package screen;
 public class ScreenVariables {
 
 	//stores the variables for the game window
-	private static String gameName = "Game";
+	private static final String gameName = "Game";
 	private static int gameWidth = 700, gameHeight = 500;
 	
 	//stores the variables for the launcher window
-	private static String launcherName  = "";
-	private static int launcherWidth = 200, launcherHeight = 180;
+	private static final String launcherName  = "";
+	private static final int launcherWidth = 200, launcherHeight = 180;
 	
 	//stores the variables for the game options window
-	private static String optionsName = "";
-	private static int optionsWidth = 800, optionsHeight = 600;
+	private static final String optionsName = "Game Options";
+	private static final int optionsWidth = 900, optionsHeight = 600;
 	
 	//stores the variables for the settings window
-	private static String settingsName = "";
-	private static int settingsWidth = 800, settingsHeight = 600;
+	private static final String settingsName = "Settings";
+	private static final int settingsWidth = 800, settingsHeight = 600;
 	
 	//stores the variables for the fatal error window
-	private static int fatalErrorWidth = 100, fatalErrorHeight = 100;
+	private static final int fatalErrorWidth = 100, fatalErrorHeight = 100;
+        
 	
 	//getters for all the variables
 	public static String getGameName() {

@@ -72,7 +72,6 @@ public class Game implements Runnable {
     private Player player;
     private Camera camera;
     private EnemyHandler enemies;
-    private Tile tile;
     private World world;
 
     /**
@@ -222,7 +221,6 @@ public class Game implements Runnable {
         //calls the method where all tiles that are to be created will be
         createTiles();
         
-        
         BufferedImage enemyIcon = ImageLoader.loadImage("back", ImageLoader.IMAGE_PNG_FORMAT_ID);
        enemies.createHuntingEnemies(enemyIcon, 2);
     }
@@ -238,7 +236,7 @@ public class Game implements Runnable {
         //creates a default tile
         new FloorTile(this, GameVariables.getDefaultTileId());
         //creates a new wall tile using the stone texture
-        tile = new WallTile(this, GameVariables.getStoneTileId());
+        new WallTile(this, GameVariables.getStoneTileId());
         new FloorTile(this, GameVariables.getRUBBLE_TILE_ID());
         new FloorTile(this, GameVariables.getGrassTileId());
         new WallTile(this, GameVariables.getMossystoneTileId());
