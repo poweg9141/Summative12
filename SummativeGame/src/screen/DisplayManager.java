@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 
 import coreEngine.Game;
 import screen.errors.FatalError;
+import screen.gameEnd.GameLost;
 import screen.launcher.Launcher;
 import screen.options.Options;
 import writers.TextWriter;
@@ -23,6 +24,7 @@ public class DisplayManager {
     //
     private Options options;
     //stores an instance of this manager for use in static classes
+    private GameLost lost;
     static DisplayManager thisManager;
 
     /**
@@ -51,13 +53,35 @@ public class DisplayManager {
             game.start();
             //game.run();
         } else {
+            game.gameVisibility(true);
         }
+    }
+    
+    public void openWin(){
+        
+    }
+    
+    public void openLost(){
+        if(lost == null){
+            lost = new GameLost(this, ScreenVariables.getGameLostName(), 
+                    ScreenVariables.getGameLostWidth(), ScreenVariables.getGameLostHeight());
+        }else{
+            lost.frameVisibility(true);
+        }            
     }
 
     //used to quit the game, ending all processes and closing all windows
-    public void quitGame() {        
-        game = null;        
-        openLauncher();
+    public void quitGame(boolean won) {        
+        game = null; 
+        if(won){
+            openWin();
+        }else{
+            openLost();
+        }   
+    }
+    
+    public void closeGame(){
+        System.exit(0);        
     }
 
     /**

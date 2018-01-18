@@ -33,7 +33,7 @@ public class Player extends Mob {
         this.player = player;
         this.game = game;
         bounds.setBounds(24, 45, 14, 19);
-        health = 1000;
+        health = 100;
     }
 
     /*

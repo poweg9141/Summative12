@@ -168,11 +168,9 @@ public class Game implements Runnable {
             fps = (int) (Math.ceil(1.0 / gameTimeSeconds));
             //resets the lastTime variable to the current time
             lastTime = currentTime;
-        }
-        //calls the method to run all code that must execute before the game closes
-        closeGame();
+        }        
         //calls the stop method to close the thread now that the game has been closed
-        stop();
+        stop(false);
     }
 
     //initializes all the game code before the game loop
@@ -266,24 +264,30 @@ public class Game implements Runnable {
     }
 
     //stops the threat
-    public synchronized void stop() {
+    public synchronized void stop(boolean won) {
         //if the game is not running exit the method
         if (!running) {
             return;
         }
         //sets running to false
         running = false;
+        //calls the method to run all code that must execute before the game closes
         closeGame();
         try {
+            frame.setVisible(false);
+            frame.dispose();
+            manager.quitGame(won);
             //joins the thread back into the main program, effectively terminating it
-            thread.join();
+            thread.join();            
         } catch (InterruptedException e) {
             //if the thread cannot be joined prints out an error, the stack trace, and exits the program
             DisplayManager.quitGameOnError(e, "Error closing the games thread, the thread may have already been closed.");
         }
-        frame.setVisible(false);
-        frame.dispose();
-        manager.quitGame();
+        
+    }
+    
+    public void gameVisibility(boolean visible){
+        frame.setVisible(visible);
     }
 
     public String getTitle() {

@@ -77,7 +77,6 @@ public abstract class Mob extends Entity {
     public void dealDamae(int damage){
         if(!damagedBefore){
            health -= damage;
-            System.out.println("-" + damage); 
             damagedBefore = true;
         }
         if(isDead())
@@ -85,7 +84,7 @@ public abstract class Mob extends Entity {
     }
     
     protected void handleDeath(){
-        game.stop();
+        game.stop(false);        
     } 
     
     public boolean isDead(){

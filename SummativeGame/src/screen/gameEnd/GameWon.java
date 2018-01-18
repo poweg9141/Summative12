@@ -1,5 +1,6 @@
 /*
- * To change this template, choose Tools | Templates
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package screen.gameEnd;
@@ -20,29 +21,29 @@ import screen.Window;
 
 /**
  *
- * @author poweg9141
+ * @author Graham
  */
-public class GameLost {
+public class GameWon {
     
-    private DisplayManager manager;
     private Window window;
     private JFrame frame;
+    private DisplayManager manager;
     
     private JLabel image;
     private JPanel panel;
     
-    public GameLost(DisplayManager manager, String title, int width, int height){
+    public GameWon(DisplayManager manager, String title, int width, int height){
         window = new Window(title, width, height);
+        frame = window.getFrame();
         this.manager = manager;
-        frame = window.getFrame();      
         initialize();
-    }
+    }        
     
     private void initialize(){
-        BufferedImage lostIcon = ImageLoader.loadImage("endGame/gameLost", ImageLoader.IMAGE_PNG_FORMAT_ID);
         
-        image = new JLabel();       
-        image.setIcon(new ImageIcon(lostIcon));
+        BufferedImage wonIcon = ImageLoader.loadImage("", ImageLoader.IMAGE_PNG_FORMAT_ID);
+         image = new JLabel();       
+        image.setIcon(new ImageIcon(wonIcon));
         
         panel = new JPanel();
         panel.add(image);
@@ -56,15 +57,6 @@ public class GameLost {
 
             @Override
             public void mousePressed(MouseEvent e) {
-                if(e.getX() >= 110 && e.getX() <= 245 && e.getY() >= 450 && e.getY() <= 550){
-                    frameVisibility(false);
-                    manager.openGame();
-                }else if(e.getX() >= 305 && e.getX() <= 530 && e.getY() >= 450 && e.getY() <= 550){
-                    frameVisibility(false);
-                    manager.openLauncher();
-                }else if(e.getX() >= 590 && e.getX() <= 680 && e.getY() >= 450 && e.getY() <= 550){
-                    manager.closeGame();
-                }
              }
 
             @Override
