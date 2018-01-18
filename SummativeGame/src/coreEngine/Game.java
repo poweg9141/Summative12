@@ -163,6 +163,7 @@ public class Game implements Runnable {
             }
             //when the max time has been taken, it renders to the screen
             render();
+            player.setDamagedBefore(false);
             //calculates the FPS the game is currently running at
             fps = (int) (Math.ceil(1.0 / gameTimeSeconds));
             //resets the lastTime variable to the current time
@@ -272,6 +273,7 @@ public class Game implements Runnable {
         }
         //sets running to false
         running = false;
+        closeGame();
         try {
             //joins the thread back into the main program, effectively terminating it
             thread.join();
@@ -279,6 +281,9 @@ public class Game implements Runnable {
             //if the thread cannot be joined prints out an error, the stack trace, and exits the program
             DisplayManager.quitGameOnError(e, "Error closing the games thread, the thread may have already been closed.");
         }
+        frame.setVisible(false);
+        frame.dispose();
+        manager.quitGame();
     }
 
     public String getTitle() {

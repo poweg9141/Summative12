@@ -39,8 +39,12 @@ public class EnemyHandler {
             Enemy e = it.next();
             e.tick();
             if(e.isCaught()){
-                it.remove();
-                caughtEnemies++;
+                if(e.isRunning()){
+                    it.remove();
+                    caughtEnemies++;
+                }else{
+                    e.damagePlayer();
+                }                
             }
         }
     }
@@ -73,7 +77,7 @@ public class EnemyHandler {
                     return;
                 }
                 if(!game.getWorld().getTileAtPosition(x, y).isSolid()){
-                    Enemy e = new Enemy(game, texture, 
+                    Enemy e = new Enemy(game, texture, 0, 
                             x * GameVariables.getSTANDARD_TILE_DIAMETER(),
                             y * GameVariables.getSTANDARD_TILE_DIAMETER());
                     enemies.add(e);
@@ -93,7 +97,7 @@ public class EnemyHandler {
                     return;
                 }
                 if(!game.getWorld().getTileAtPosition(x, y).isSolid()){
-                    Enemy e = new Enemy(game, texture, 
+                    Enemy e = new Enemy(game, texture, GameVariables.getHunterDamage(), 
                             x * GameVariables.getSTANDARD_TILE_DIAMETER(),
                             y * GameVariables.getSTANDARD_TILE_DIAMETER());
                     e.setRunning(false);

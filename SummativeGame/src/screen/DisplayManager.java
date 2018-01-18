@@ -55,8 +55,9 @@ public class DisplayManager {
     }
 
     //used to quit the game, ending all processes and closing all windows
-    public void quitGame() {
-        System.exit(0);
+    public void quitGame() {        
+        game = null;        
+        openLauncher();
     }
 
     /**

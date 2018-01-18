@@ -21,14 +21,16 @@ public class Enemy extends Mob {
     private BufferedImage image;
     private boolean running;
     private boolean caught;
+    private int damagePerHit;
 
-    public Enemy(Game game, BufferedImage image, float x, float y) {
+    public Enemy(Game game, BufferedImage image, int damagePerHit, float x, float y) {
         super(game, x, y, STANDARD_DIAMETER, STANDARD_DIAMETER);
         this.game = game;
         this.image = image;
         bounds.setBounds(16, 16, 32, 32);
         running  = true;
         caught = false;
+        this.damagePerHit = damagePerHit;
     }
     
     @Override
@@ -75,11 +77,19 @@ public class Enemy extends Mob {
         }
     }
     
+    public boolean isRunning(){
+        return running;
+    }
+    
     public void setRunning(boolean running){
         this.running = running;
     }
     
     public boolean isCaught(){
         return caught;
+    }
+    
+    public void damagePlayer(){
+        game.getPlayer().dealDamae(damagePerHit);
     }
 }

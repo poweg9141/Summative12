@@ -3,6 +3,7 @@ package entities.mobs;
 import coreEngine.Game;
 import coreEngine.GameVariables;
 import entities.Entity;
+import screen.DisplayManager;
 
 /**
  * is anything in that game that has the ability to move or change form
@@ -22,6 +23,7 @@ public abstract class Mob extends Entity {
     //variables to store their health and speed
     protected int health;
     protected float speed;
+    protected boolean damagedBefore;
 
     /**
      * creates a mob
@@ -71,6 +73,26 @@ public abstract class Mob extends Entity {
     protected boolean colliding(int x, int y) {
         return game.getWorld().getTileAtPosition(x, y).isSolid();
     }
+    
+    public void dealDamae(int damage){
+        if(!damagedBefore){
+           health -= damage;
+            System.out.println("-" + damage); 
+            damagedBefore = true;
+        }
+        if(isDead())
+            handleDeath();
+    }
+    
+    protected void handleDeath(){
+        game.stop();
+    } 
+    
+    public boolean isDead(){
+        if(health > 0)
+            return false;
+        return true;
+    }
 
     public int getHealth() {
         return health;
@@ -86,5 +108,9 @@ public abstract class Mob extends Entity {
 
     public void setSpeed(float speed) {
         this.speed = speed;
+    }
+    
+    public void setDamagedBefore(boolean damaged){
+        damagedBefore = damaged;
     }
 }

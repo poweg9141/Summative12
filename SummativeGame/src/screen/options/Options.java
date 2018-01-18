@@ -159,18 +159,23 @@ public class Options {
                 switch (enemies.getSelectedIndex()) {
                     case 0:
                         GameVariables.setHuntersToRender(0);
+                        GameVariables.setHunterDamage(0);
                         break;
                     case 1:
                         GameVariables.setHuntersToRender(1);
+                        GameVariables.setHunterDamage(1);
                         break;
                     case 2:
                         GameVariables.setHuntersToRender(2);
+                        GameVariables.setHunterDamage(1);
                         break;
                     case 3:
-                        GameVariables.setHuntersToRender(4);
+                        GameVariables.setHuntersToRender(4);                        
+                        GameVariables.setHunterDamage(2);
                         break;
                     case 4:
                         GameVariables.setHuntersToRender(6);
+                        GameVariables.setHunterDamage(3);
                         break;
                 }
             }
