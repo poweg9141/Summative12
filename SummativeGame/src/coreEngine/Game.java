@@ -91,8 +91,8 @@ public class Game implements Runnable {
         //initializes the score loader
         scores = new ScoreLoader();
         camera = new Camera(this, 0, 0);       
-        world = new World("LevelTwo");
-      enemies = new EnemyHandler(this);
+        world = new World("LevelThree");
+        enemies = new EnemyHandler(this);
     }
 
     //method to update the game every frame before rendering
@@ -127,7 +127,7 @@ public class Game implements Runnable {
 
         player.render(g);
         // places the flashlight filter overtop everything
-        //flashlight.render(g);
+        flashlight.render(g);
         //DRAWING ENDS HERE
 
         //display the buffers to the screen
@@ -193,7 +193,7 @@ public class Game implements Runnable {
         frame.pack();
 
         //creates the player
-        BufferedImage playerIcon = ImageLoader.loadImage("player", ImageLoader.IMAGE_PNG_FORMAT_ID);
+        BufferedImage playerIcon = ImageLoader.loadImage("player_1", ImageLoader.IMAGE_PNG_FORMAT_ID);
         player = new Player(this, playerIcon, world.getPlayerX(), world.getPlayerY());
 
         // creates the flashlight
@@ -221,8 +221,8 @@ public class Game implements Runnable {
         createTiles();
         
         
-        BufferedImage enemyIcon = ImageLoader.loadImage("back", ImageLoader.IMAGE_PNG_FORMAT_ID);
-       enemies.createHuntingEnemies(enemyIcon, 2);
+        BufferedImage enemyIcon = ImageLoader.loadImage("runrunrun", ImageLoader.IMAGE_PNG_FORMAT_ID);
+       enemies.createHuntingEnemies(enemyIcon, 20);
     }
 
     //method runs before the game closes
