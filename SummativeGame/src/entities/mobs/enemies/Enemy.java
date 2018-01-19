@@ -8,7 +8,9 @@ import coreEngine.Game;
 import coreEngine.GameVariables;
 import entities.Entity;
 import entities.mobs.Mob;
+import entities.mobs.Player;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 /**
@@ -66,12 +68,21 @@ public class Enemy extends Mob {
     }
     
     private void setCaught(){
+        /*
         float px = game.getPlayer().getX();
         float py = game.getPlayer().getY();
         float pw = game.getPlayer().getWidth();
         float ph = game.getPlayer().getHeight();
         if(px + pw > x && px < x + width){
             if(py + pw > y && py < y + width){
+                caught = true;
+            }
+        }
+        */
+        Player player = game.getPlayer();
+        Rectangle pBounds = player.getBounds();
+        if(player.getX() + pBounds.getWidth() >= x + bounds.x && player.getX() + pBounds.getX() <= x + bounds.width){
+            if(player.getY() >= y - bounds.height && player.getY() - pBounds.height <= y){
                 caught = true;
             }
         }
