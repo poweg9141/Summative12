@@ -1,0 +1,11 @@
+Developer Explaination:
+Error Loading Image! File must be inside the res/textures directory with the correct file format ID
+ 
+Java StackTrace:
+javax.imageio.IIOException: Can't read input file!
+	at javax.imageio.ImageIO.read(ImageIO.java:1301)
+	at loaders.ImageLoader.loadImage(ImageLoader.java:51)
+	at coreEngine.Game.initialize(Game.java:196)
+	at coreEngine.Game.run(Game.java:143)
+	at java.lang.Thread.run(Thread.java:722)
+
