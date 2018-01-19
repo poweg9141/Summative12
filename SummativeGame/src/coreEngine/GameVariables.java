@@ -24,7 +24,7 @@ public class GameVariables {
         
         private static final int FlashlightDiameter = 1280;
         
-        private static String levelFile = "LevelZero";
+        private static String levelFile = "LevelFive";
         
         private static boolean isNight = true;
         
@@ -64,6 +64,7 @@ public class GameVariables {
         private static final int RUBBLE_TILE_ID = 9006;
 	private static final String RUBBLE_TILE_LOCATION = "floors/rubble";
 	private static BufferedImage RUBBLE_TILE;        
+        private static final double RUBBLE_SPEED_MULTIPLIER = 0.75;
 	//IDENTIFIERS AND FILE LOCATIONS FOR GANE TILES END HERE
 	
 	//used to connect all tile ids to their buffered images
