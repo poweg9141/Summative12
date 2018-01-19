@@ -72,7 +72,6 @@ public class Game implements Runnable {
     private Player player;
     private Camera camera;
     private EnemyHandler enemies;
-    private Tile tile;
     private World world;
 
     /**
@@ -90,8 +89,8 @@ public class Game implements Runnable {
         this.manager = manager;
         //initializes the score loader
         scores = new ScoreLoader();
-        camera = new Camera(this, 0, 0);       
-        world = new World("LevelThree");
+        camera = new Camera(this, 0, 0);
+        world = new World(GameVariables.getLevelFile());
         enemies = new EnemyHandler(this);
     }
 
@@ -123,11 +122,13 @@ public class Game implements Runnable {
 
         //DRAWING BEGINS HERE	
         world.render(g);
-        enemies.render(g);	
+        enemies.render(g);
 
         player.render(g);
         // places the flashlight filter overtop everything
-        flashlight.render(g);
+        if (GameVariables.isIsNight()) {
+            flashlight.render(g);
+        }
         //DRAWING ENDS HERE
 
         //display the buffers to the screen
@@ -162,15 +163,14 @@ public class Game implements Runnable {
             }
             //when the max time has been taken, it renders to the screen
             render();
+            player.setDamagedBefore(false);
             //calculates the FPS the game is currently running at
             fps = (int) (Math.ceil(1.0 / gameTimeSeconds));
             //resets the lastTime variable to the current time
             lastTime = currentTime;
-        }
-        //calls the method to run all code that must execute before the game closes
-        closeGame();
+        }        
         //calls the stop method to close the thread now that the game has been closed
-        stop();
+        stop(false);
     }
 
     //initializes all the game code before the game loop
@@ -198,7 +198,7 @@ public class Game implements Runnable {
 
         // creates the flashlight
         BufferedImage flashlightIcon = ImageLoader.loadImage("flashlight", ImageLoader.IMAGE_PNG_FORMAT_ID);
-        flashlight = new Flashlight(this, flashlightIcon, player.getX() - 608, player.getY() - 608);       
+        flashlight = new Flashlight(this, flashlightIcon, player.getX() - 608, player.getY() - 608);
 
         //creates and adds the key listener
         input = new KeyInput(this, flashlight, player);
@@ -219,10 +219,11 @@ public class Game implements Runnable {
         Tile.initializeTiles();
         //calls the method where all tiles that are to be created will be
         createTiles();
-        
-        
-        BufferedImage enemyIcon = ImageLoader.loadImage("runrunrun", ImageLoader.IMAGE_PNG_FORMAT_ID);
-       enemies.createHuntingEnemies(enemyIcon, 20);
+
+        BufferedImage runnerIcon = ImageLoader.loadImage("npcs/runner", ImageLoader.IMAGE_PNG_FORMAT_ID);
+        BufferedImage hunterIcon = ImageLoader.loadImage("npcs/hunter", ImageLoader.IMAGE_PNG_FORMAT_ID);
+        enemies.createRunningEnemies(runnerIcon, GameVariables.getRunnersToRender());
+        enemies.createHuntingEnemies(hunterIcon, GameVariables.getHuntersToRender());
     }
 
     //method runs before the game closes
@@ -236,7 +237,7 @@ public class Game implements Runnable {
         //creates a default tile
         new FloorTile(this, GameVariables.getDefaultTileId());
         //creates a new wall tile using the stone texture
-        tile = new WallTile(this, GameVariables.getStoneTileId());
+        new WallTile(this, GameVariables.getStoneTileId());
         new FloorTile(this, GameVariables.getRUBBLE_TILE_ID());
         new FloorTile(this, GameVariables.getGrassTileId());
         new WallTile(this, GameVariables.getMossystoneTileId());
@@ -263,20 +264,30 @@ public class Game implements Runnable {
     }
 
     //stops the threat
-    public synchronized void stop() {
+    public synchronized void stop(boolean won) {
         //if the game is not running exit the method
         if (!running) {
             return;
         }
         //sets running to false
         running = false;
+        //calls the method to run all code that must execute before the game closes
+        closeGame();
         try {
+            frame.setVisible(false);
+            frame.dispose();
+            manager.quitGame(won);
             //joins the thread back into the main program, effectively terminating it
-            thread.join();
+            thread.join();            
         } catch (InterruptedException e) {
             //if the thread cannot be joined prints out an error, the stack trace, and exits the program
             DisplayManager.quitGameOnError(e, "Error closing the games thread, the thread may have already been closed.");
         }
+        
+    }
+    
+    public void gameVisibility(boolean visible){
+        frame.setVisible(visible);
     }
 
     public String getTitle() {
@@ -310,8 +321,8 @@ public class Game implements Runnable {
     public World getWorld() {
         return world;
     }
-    
-    public EnemyHandler getEnemyHandler(){
+
+    public EnemyHandler getEnemyHandler() {
         return enemies;
     }
 }

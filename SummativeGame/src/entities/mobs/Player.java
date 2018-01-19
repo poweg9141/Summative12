@@ -33,6 +33,7 @@ public class Player extends Mob {
         this.player = player;
         this.game = game;
         bounds.setBounds(24, 45, 14, 19);
+        health = 100;
     }
 
     /*
@@ -67,23 +68,7 @@ public class Player extends Mob {
         super.move(dx, dy);
         this.dx = dx;
         this.dy = dy;
-    }
-    
-    public void dealDamae(int damage){
-        health -= damage;
-        if(isDead())
-            handleDeath();
-    }
-    
-    private void handleDeath(){
-        
-    } 
-    
-    public boolean isDead(){
-        if(health > 0)
-            return false;
-        return true;
-    }
+    }    
 
     public float getXDisplacement() {
         return dx;

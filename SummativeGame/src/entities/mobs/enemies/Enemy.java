@@ -8,7 +8,9 @@ import coreEngine.Game;
 import coreEngine.GameVariables;
 import entities.Entity;
 import entities.mobs.Mob;
+import entities.mobs.Player;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 /**
@@ -21,14 +23,16 @@ public class Enemy extends Mob {
     private BufferedImage image;
     private boolean running;
     private boolean caught;
+    private int damagePerHit;
 
-    public Enemy(Game game, BufferedImage image, float x, float y) {
+    public Enemy(Game game, BufferedImage image, int damagePerHit, float x, float y) {
         super(game, x, y, STANDARD_DIAMETER, STANDARD_DIAMETER);
         this.game = game;
         this.image = image;
         bounds.setBounds(16, 16, 32, 32);
         running  = true;
         caught = false;
+        this.damagePerHit = damagePerHit;
     }
     
     @Override
@@ -64,6 +68,7 @@ public class Enemy extends Mob {
     }
     
     private void setCaught(){
+        /*
         float px = game.getPlayer().getX();
         float py = game.getPlayer().getY();
         float pw = game.getPlayer().getWidth();
@@ -73,6 +78,18 @@ public class Enemy extends Mob {
                 caught = true;
             }
         }
+        */
+        Player player = game.getPlayer();
+        Rectangle pBounds = player.getBounds();
+        if(player.getX() + pBounds.getWidth() >= x + bounds.x && player.getX() + pBounds.getX() <= x + bounds.width){
+            if(player.getY() >= y - bounds.height && player.getY() - pBounds.height <= y){
+                caught = true;
+            }
+        }
+    }
+    
+    public boolean isRunning(){
+        return running;
     }
     
     public void setRunning(boolean running){
@@ -81,5 +98,9 @@ public class Enemy extends Mob {
     
     public boolean isCaught(){
         return caught;
+    }
+    
+    public void damagePlayer(){
+        game.getPlayer().dealDamae(damagePerHit);
     }
 }

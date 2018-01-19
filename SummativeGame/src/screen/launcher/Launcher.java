@@ -33,6 +33,7 @@ public class Launcher{
 
 	/**
 	 * create the launcher with the settings and play options that appear before the game starts
+        * @param manager the display manager that will manage this JFrame
 	 * @param title the title of the JFrame the window will have
 	 * @param width the width of the JFrame
 	 * @param height the height of the JFrame
@@ -60,6 +61,7 @@ public class Launcher{
 		start.setToolTipText("Start the game with all the applied settings and options.");
 		start.setBackground(Color.GREEN);
 		start.addActionListener(new ActionListener(){
+                        @Override
 			public void actionPerformed(ActionEvent e){
 				frameVisibility(false);
 				manager.openGame();
@@ -70,6 +72,12 @@ public class Launcher{
 		//creates the options button
 		options = new JButton("GAME OPTIONS");
 		options.setToolTipText("Edit options for in game play like map, day/night, etc.");
+                options.addActionListener(new ActionListener(){
+                   public void actionPerformed(ActionEvent e){
+                       frameVisibility(false);
+                       manager.openOptions();
+                   } 
+                });
 		frame.add(options);
 		
 		//creates the settings button
@@ -82,9 +90,10 @@ public class Launcher{
 		quit.setToolTipText("Quit the game.");
 		//adds the action listener for the quit button
 		quit.addActionListener(new ActionListener(){
+                        @Override
 			public void actionPerformed(ActionEvent e){
 				//quits the game when the button is pressed
-				manager.quitGame();
+				manager.closeGame();
 			}
 		});
 		frame.add(quit);
@@ -93,7 +102,7 @@ public class Launcher{
 		frame.setVisible(true);
 	}
 	
-	private void frameVisibility(boolean visible){
+	public void frameVisibility(boolean visible){
 		frame.setVisible(visible);
 	}
 }
