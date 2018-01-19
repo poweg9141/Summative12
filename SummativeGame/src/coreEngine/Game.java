@@ -193,7 +193,7 @@ public class Game implements Runnable {
         frame.pack();
 
         //creates the player
-        BufferedImage playerIcon = ImageLoader.loadImage("player", ImageLoader.IMAGE_PNG_FORMAT_ID);
+        BufferedImage playerIcon = ImageLoader.loadImage("player_1", ImageLoader.IMAGE_PNG_FORMAT_ID);
         player = new Player(this, playerIcon, world.getPlayerX(), world.getPlayerY());
 
         // creates the flashlight
