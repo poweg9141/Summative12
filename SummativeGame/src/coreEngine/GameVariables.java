@@ -15,7 +15,7 @@ public class GameVariables {
 	private static double playerWidth = 64;
 	private static double playerHeight = 64;
 	//the speed of a player
-	private static double playerSpeed = 0.01;
+	private static double playerSpeed = 0.2;
         //stores the speed of the enemies
         private static double entitySpeed = 0.01;
 	//stores the default name and score for the high scores text file, used when creating a new file
@@ -24,7 +24,7 @@ public class GameVariables {
         
         private static final int FlashlightDiameter = 1280;
         
-        private static String levelFile = "LevelZero";
+        private static String levelFile = "LevelFive";
         
         private static boolean isNight = true;
         
@@ -62,6 +62,7 @@ public class GameVariables {
         private static final int RUBBLE_TILE_ID = 9006;
 	private static final String RUBBLE_TILE_LOCATION = "floors/rubble";
 	private static BufferedImage RUBBLE_TILE;        
+        private static final double RUBBLE_SPEED_MULTIPLIER = 0.75;
 	//IDENTIFIERS AND FILE LOCATIONS FOR GANE TILES END HERE
 	
 	//used to connect all tile ids to their buffered images
