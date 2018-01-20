@@ -250,12 +250,6 @@ public class Game implements Runnable {
         new WallTile(this, GameVariables.getMossystoneTileId());
     }
 
-    // add the flashlight circle over everything else on the screen
-    public void postProcessing() {
-
-        // middle of circle should be where the player is at all times
-    }
-
     //starts the thread
     public synchronized void start() {
         //if the game is already running, exit the method
