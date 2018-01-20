@@ -31,6 +31,10 @@ public class ScreenVariables {
     //stores the variables for the game lost window
     private static final String gameLostName = "You Died!";
     private static final int gameLostWidth = 800, gameLostHeight = 600;
+    
+    //stores the variables for the game lost window
+    private static final String gameWonName = "You Won!";
+    private static final int gameWonWidth = 800, gameWonHeight = 600;
 
     //getters for all the variables
     public static String getGameName() {
@@ -99,5 +103,17 @@ public class ScreenVariables {
 
     public static int getGameLostHeight() {
         return gameLostHeight;
+    }
+    
+    public static String getGameWonName() {
+        return gameWonName;
+    }
+
+    public static int getGameWonWidth() {
+        return gameWonWidth;
+    }
+
+    public static int getGameWonHeight() {
+        return gameWonHeight;
     }
 }

@@ -3,8 +3,10 @@ package screen;
 import javax.swing.JFrame;
 
 import coreEngine.Game;
+import java.util.Timer;
 import screen.errors.FatalError;
 import screen.gameEnd.GameLost;
+import screen.gameEnd.GameWon;
 import screen.launcher.Launcher;
 import screen.options.Options;
 import writers.TextWriter;
@@ -25,8 +27,11 @@ public class DisplayManager {
     private Options options;
     //stores an instance of this manager for use in static classes
     private GameLost lost;
+    private GameWon won;
     static DisplayManager thisManager;
 
+    long startTime;
+    long endTime;
     /**
      * empty constructor, here in case of later implementation
      */
@@ -47,9 +52,10 @@ public class DisplayManager {
 
     //used to open the game or start it if it has not already been initialized
     public void openGame() {
+        startTime = System.currentTimeMillis();
         if (game == null) {
             game = new Game(this, ScreenVariables.getGameName(),
-                    ScreenVariables.getGameWidth(), ScreenVariables.getGameHeight());
+                    ScreenVariables.getGameWidth(), ScreenVariables.getGameHeight(), startTime);
             game.start();
             //game.run();
         } else {
@@ -58,13 +64,20 @@ public class DisplayManager {
     }
     
     public void openWin(){
-        
+        endTime = System.currentTimeMillis();
+        if(won == null){
+            won = new GameWon(this, ScreenVariables.getGameWonName(), 
+                    ScreenVariables.getGameWonWidth(), ScreenVariables.getGameWonHeight(), ((endTime-startTime)/1000));
+        }else{
+            won.frameVisibility(true);
+        }
     }
     
     public void openLost(){
+        endTime = System.currentTimeMillis();
         if(lost == null){
             lost = new GameLost(this, ScreenVariables.getGameLostName(), 
-                    ScreenVariables.getGameLostWidth(), ScreenVariables.getGameLostHeight());
+                    ScreenVariables.getGameLostWidth(), ScreenVariables.getGameLostHeight(), ((endTime-startTime)/1000));
         }else{
             lost.frameVisibility(true);
         }            

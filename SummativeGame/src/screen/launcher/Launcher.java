@@ -5,6 +5,9 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
@@ -27,7 +30,7 @@ public class Launcher{
 	private DisplayManager manager;
 	//stores the JFrame
 	private JFrame frame;
-	
+        
 	//the four buttons that will appear on the Games Launcher
 	private JButton start, options, setting, quit;
 
@@ -65,6 +68,7 @@ public class Launcher{
 			public void actionPerformed(ActionEvent e){
 				frameVisibility(false);
 				manager.openGame();
+                                
 			}
 		});
 		frame.add(start);		

@@ -6,6 +6,7 @@ import java.awt.event.KeyListener;
 import coreEngine.Game;
 import entities.mobs.Flashlight;
 import entities.mobs.Player;
+import java.util.Timer;
 
 /**
  * takes in inputs from the keyboard
