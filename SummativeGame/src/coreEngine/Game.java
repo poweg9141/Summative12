@@ -68,7 +68,12 @@ public class Game implements Runnable {
 
     //stores the flashlight
     Flashlight flashlight;
-
+    
+    //start time
+    long startTime;
+    //end time
+    long endTime;
+    
     private Player player;
     private Camera camera;
     private EnemyHandler enemies;
@@ -80,13 +85,15 @@ public class Game implements Runnable {
      * @param title the title to be displayed to the games JFrame
      * @param width the width of the games JFrame
      * @param height the height of the games JFrame
+     * @param startTime starts the time
      */
-    public Game(DisplayManager manager, String title, int width, int height) {
+    public Game(DisplayManager manager, String title, int width, int height, long startTime) {
         //stores the passed in variables
         this.width = width;
         this.height = height;
         this.title = title;
         this.manager = manager;
+        this.startTime = startTime;
         //initializes the score loader
         scores = new ScoreLoader();
         camera = new Camera(this, 0, 0);
@@ -199,7 +206,7 @@ public class Game implements Runnable {
         // creates the flashlight
         BufferedImage flashlightIcon = ImageLoader.loadImage("flashlight", ImageLoader.IMAGE_PNG_FORMAT_ID);
         flashlight = new Flashlight(this, flashlightIcon, player.getX() - 608, player.getY() - 608);
-
+     
         //creates and adds the key listener
         input = new KeyInput(this, flashlight, player);
         frame.addKeyListener(input);
@@ -241,12 +248,6 @@ public class Game implements Runnable {
         new FloorTile(this, GameVariables.getRUBBLE_TILE_ID());
         new FloorTile(this, GameVariables.getGrassTileId());
         new WallTile(this, GameVariables.getMossystoneTileId());
-    }
-
-    // add the flashlight circle over everything else on the screen
-    public void postProcessing() {
-
-        // middle of circle should be where the player is at all times
     }
 
     //starts the thread

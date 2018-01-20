@@ -32,7 +32,8 @@ public class GameWon {
     private JLabel image;
     private JPanel panel;
     
-    public GameWon(DisplayManager manager, String title, int width, int height){
+    
+    public GameWon(DisplayManager manager, String title, int width, int height, long scoretime){
         window = new Window(title, width, height);
         frame = window.getFrame();
         this.manager = manager;
@@ -41,7 +42,7 @@ public class GameWon {
     
     private void initialize(){
         
-        BufferedImage wonIcon = ImageLoader.loadImage("", ImageLoader.IMAGE_PNG_FORMAT_ID);
+        BufferedImage wonIcon = ImageLoader.loadImage("endGame/gamewon", ImageLoader.IMAGE_PNG_FORMAT_ID);
          image = new JLabel();       
         image.setIcon(new ImageIcon(wonIcon));
         
