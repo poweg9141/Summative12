@@ -16,6 +16,7 @@ import entities.mobs.Flashlight;
 import entities.mobs.enemies.EnemyHandler;
 import environment.World;
 import graphics.Camera;
+import graphics.SpriteSheet;
 import input.KeyInput;
 import loaders.ImageLoader;
 import loaders.ScoreLoader;
@@ -193,8 +194,9 @@ public class Game implements Runnable {
         frame.pack();
 
         //creates the player
-        BufferedImage playerIcon = ImageLoader.loadImage("player_1", ImageLoader.IMAGE_PNG_FORMAT_ID);
-        player = new Player(this, playerIcon, world.getPlayerX(), world.getPlayerY());
+        BufferedImage playerIcon = ImageLoader.loadImage("player_sheet", ImageLoader.IMAGE_PNG_FORMAT_ID);
+        SpriteSheet playerSheet = new SpriteSheet(playerIcon, 2, 64);
+        player = new Player(this, playerSheet, world.getPlayerX(), world.getPlayerY());
 
         // creates the flashlight
         BufferedImage flashlightIcon = ImageLoader.loadImage("flashlight", ImageLoader.IMAGE_PNG_FORMAT_ID);
