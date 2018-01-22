@@ -100,6 +100,8 @@ public class ScoreLoader {
 	 * @param score the score they got
 	 */
 	public void addScore(String name, int score){
+            //calls the method that adds all the multipliers to the score
+            score = multiplyScore(score);
 		//copys the arrays over to a new array with one extra spot
 		String[] tempNames = Arrays.copyOf(names, names.length + 1);
 		int[] tempScores = Arrays.copyOf(points, points.length + 1);
@@ -136,6 +138,52 @@ public class ScoreLoader {
         	names[i - 1] = tempNames[i];
         }
 	}
+        
+        private int multiplyScore(int score){
+            double multiplier = 1;
+            switch(GameVariables.getRunnersToRender()){
+                case 3:
+                    score *= 1.75;
+                    break;
+                case 6:
+                    score *= 1.5;
+                    break;
+                case 8:
+                    score *= 1.25;
+                    break;
+                case 12:
+                    score *= 1;
+                    break;
+                default:
+                    score *= 1.75;
+                    break;
+            }
+            switch(GameVariables.getHuntersToRender()){
+                case 0:
+                    score *= 6;
+                    break;
+                case 1:
+                    score *= 5;
+                    break;
+                case 2:
+                    score *= 4;
+                    break;
+                case 4:
+                    score *= 2;
+                    break;
+                case 6:
+                    score *= 1;
+                    break;
+                default:
+                    score *= 6;
+                    break;
+            }
+            if(!GameVariables.isIsNight()){
+               score *= 2; 
+            }
+            int newScore = (int)Math.ceil(score);
+            return newScore;
+        }
 	
 	//swaps two number in an array
     private void swap(int[] ar, int p1, int p2) {
