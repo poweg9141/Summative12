@@ -15,6 +15,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import loaders.ImageLoader;
 import screen.DisplayManager;
 import screen.Window;
@@ -31,12 +32,15 @@ public class GameWon {
     
     private JLabel image;
     private JPanel panel;
+    private JTextField textbox;
     
+    private double score;
     
-    public GameWon(DisplayManager manager, String title, int width, int height, long scoretime){
+    public GameWon(DisplayManager manager, String title, int width, int height, double scoretime){
         window = new Window(title, width, height);
         frame = window.getFrame();
         this.manager = manager;
+        score = scoretime;
         initialize();
     }        
     
@@ -46,9 +50,12 @@ public class GameWon {
          image = new JLabel();       
         image.setIcon(new ImageIcon(wonIcon));
         
+        textbox = new JTextField("Score: " + score);
+        
         panel = new JPanel();
         panel.add(image);
         frame.add(panel);
+        frame.add(textbox);
         frame.validate();
         
         frame.addMouseListener(new MouseListener(){
@@ -58,6 +65,15 @@ public class GameWon {
 
             @Override
             public void mousePressed(MouseEvent e) {
+                if(e.getX() >= 110 && e.getX() <= 245 && e.getY() >= 450 && e.getY() <= 550){
+                    frameVisibility(false);
+                    manager.openGame();
+                }else if(e.getX() >= 305 && e.getX() <= 530 && e.getY() >= 450 && e.getY() <= 550){
+                    frameVisibility(false);
+                    manager.openLauncher();
+                }else if(e.getX() >= 590 && e.getX() <= 680 && e.getY() >= 450 && e.getY() <= 550){
+                    manager.closeGame();
+                }
              }
 
             @Override

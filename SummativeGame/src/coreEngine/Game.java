@@ -108,6 +108,9 @@ public class Game implements Runnable {
         world.update();
         player.tick();
         enemies.tick();
+        if(enemies.getCaughtEnemies() >= GameVariables.getRunnersToRender()){
+            stop(true);
+        }
         // tile.setImage(Tile.tiles[Tile.returnRenderID(GameVariables.getRUBBLE_TILE_ID())].getImage());
     }
 

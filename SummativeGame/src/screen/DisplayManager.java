@@ -67,17 +67,16 @@ public class DisplayManager {
         endTime = System.currentTimeMillis();
         if(won == null){
             won = new GameWon(this, ScreenVariables.getGameWonName(), 
-                    ScreenVariables.getGameWonWidth(), ScreenVariables.getGameWonHeight(), ((endTime-startTime)/1000));
+                    ScreenVariables.getGameWonWidth(), ScreenVariables.getGameWonHeight(), (double)((endTime-startTime)/1000));
         }else{
             won.frameVisibility(true);
         }
     }
     
     public void openLost(){
-        endTime = System.currentTimeMillis();
         if(lost == null){
             lost = new GameLost(this, ScreenVariables.getGameLostName(), 
-                    ScreenVariables.getGameLostWidth(), ScreenVariables.getGameLostHeight(), ((endTime-startTime)/1000));
+                    ScreenVariables.getGameLostWidth(), ScreenVariables.getGameLostHeight());
         }else{
             lost.frameVisibility(true);
         }            
