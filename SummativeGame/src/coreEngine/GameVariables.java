@@ -25,12 +25,12 @@ public class GameVariables {
         
         private static final int FlashlightDiameter = 1280;
         
-        private static String levelFile = "LevelFive";
+        private static String levelFile = "LevelZero";
         
         private static boolean isNight = true;
         
-        private static int runnersToRender = 6;
-        private static int huntersToRender = 2;
+        private static int runnersToRender = 3;
+        private static int huntersToRender = 0;
         
         private static int hunterDamage = 1;
 	
