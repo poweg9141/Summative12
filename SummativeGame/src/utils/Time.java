@@ -29,6 +29,13 @@ public class Time {
         //returns the string
         return date;
     }
+    
+    public static boolean hasBeenTime(long startTime, double desiredTimeSeconds){
+        if(getCurrentTime() - startTime >= desiredTimeSeconds * 1000000000){
+            return true;
+        }
+        return false;
+    }
 
     public static long getStartTimeNano() {
         return startTime;
