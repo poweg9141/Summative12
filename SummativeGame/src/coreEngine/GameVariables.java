@@ -18,7 +18,7 @@ public class GameVariables {
 	//the speed of a player
 	private static double playerSpeed = 0.02;
         //stores the speed of the enemies
-        private static double entitySpeed = 0.01;
+        private static double entitySpeed = 0.000000000001;
 	//stores the default name and score for the high scores text file, used when creating a new file
 	//NOTE: default name must have NO spaces
 	private static final String defaultHighScoreName = "WendyWako";
