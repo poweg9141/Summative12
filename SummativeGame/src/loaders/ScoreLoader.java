@@ -221,6 +221,7 @@ public class ScoreLoader {
 	
 	//calls the method that will write all the scores back to the text file
 	public void saveScores(){
+                
 		TextWriter.writeScores(names, points);
 	}
 

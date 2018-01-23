@@ -74,10 +74,9 @@ public class DisplayManager {
     }
     
     public void openLost(){
-        endTime = System.currentTimeMillis();
         if(lost == null){
             lost = new GameLost(this, ScreenVariables.getGameLostName(), 
-                    ScreenVariables.getGameLostWidth(), ScreenVariables.getGameLostHeight(), ((endTime-startTime)/1000));
+                    ScreenVariables.getGameLostWidth(), ScreenVariables.getGameLostHeight());
         }else{
             lost.frameVisibility(true);
         }            

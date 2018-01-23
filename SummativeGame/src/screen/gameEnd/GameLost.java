@@ -31,7 +31,7 @@ public class GameLost {
     private JLabel image;
     private JPanel panel;
     
-    public GameLost(DisplayManager manager, String title, int width, int height, double scoretime){
+    public GameLost(DisplayManager manager, String title, int width, int height){
         window = new Window(title, width, height);
         this.manager = manager;
         frame = window.getFrame();

@@ -18,6 +18,8 @@ import environment.World;
 import graphics.Camera;
 import graphics.SpriteSheet;
 import input.KeyInput;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import loaders.ImageLoader;
 import loaders.ScoreLoader;
 import screen.DisplayManager;
@@ -108,7 +110,8 @@ public class Game implements Runnable {
         world.update();
         player.tick();
         enemies.tick();
-        if(enemies.getCaughtEnemies() == GameVariables.getRunnersToRender()){
+
+        if(enemies.getCaughtEnemies() >= GameVariables.getRunnersToRender()){
             stop(true);
         }
         // tile.setImage(Tile.tiles[Tile.returnRenderID(GameVariables.getRUBBLE_TILE_ID())].getImage());
@@ -177,6 +180,8 @@ public class Game implements Runnable {
             player.setDamagedBefore(false);
             //calculates the FPS the game is currently running at
             fps = (int) (Math.ceil(1.0 / gameTimeSeconds));
+            // set player speed
+            
             //resets the lastTime variable to the current time
             lastTime = currentTime;
         }        

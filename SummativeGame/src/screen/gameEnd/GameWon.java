@@ -15,6 +15,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import loaders.ImageLoader;
 import screen.DisplayManager;
 import screen.Window;
@@ -31,10 +32,14 @@ public class GameWon {
     
     private JLabel image;
     private JPanel panel;
+    private JTextField textbox;
     
+    private double score;
+
     public GameWon(DisplayManager manager, String title, int width, int height, double scoretime){
         window = new Window(title, width, height);
         this.manager = manager;
+        score = scoretime;
         frame = window.getFrame();
         initialize();
     }
@@ -45,9 +50,12 @@ public class GameWon {
         image = new JLabel();       
         image.setIcon(new ImageIcon(lostIcon));
         
+        textbox = new JTextField("Score: " + score);
+        
         panel = new JPanel();
         panel.add(image);
         frame.add(panel);
+        frame.add(textbox);     
         frame.validate();
         
         frame.addMouseListener(new MouseListener(){
