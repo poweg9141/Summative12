@@ -26,29 +26,29 @@ import screen.Window;
  */
 public class GameWon {
     
+    private DisplayManager manager;
     private Window window;
     private JFrame frame;
-    private DisplayManager manager;
     
     private JLabel image;
     private JPanel panel;
     private JTextField textbox;
     
     private double score;
-    
+
     public GameWon(DisplayManager manager, String title, int width, int height, double scoretime){
         window = new Window(title, width, height);
-        frame = window.getFrame();
         this.manager = manager;
         score = scoretime;
+        frame = window.getFrame();
         initialize();
-    }        
+    }
     
     private void initialize(){
+        BufferedImage lostIcon = ImageLoader.loadImage("endGame/gamewon", ImageLoader.IMAGE_PNG_FORMAT_ID);
         
-        BufferedImage wonIcon = ImageLoader.loadImage("endGame/gamewon", ImageLoader.IMAGE_PNG_FORMAT_ID);
-         image = new JLabel();       
-        image.setIcon(new ImageIcon(wonIcon));
+        image = new JLabel();       
+        image.setIcon(new ImageIcon(lostIcon));
         
         textbox = new JTextField("Score: " + score);
         

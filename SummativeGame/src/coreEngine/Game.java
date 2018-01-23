@@ -110,6 +110,7 @@ public class Game implements Runnable {
         world.update();
         player.tick();
         enemies.tick();
+
         if(enemies.getCaughtEnemies() >= GameVariables.getRunnersToRender()){
             stop(true);
         }

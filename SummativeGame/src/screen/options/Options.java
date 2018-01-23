@@ -109,21 +109,27 @@ public class Options {
                 switch (levels.getSelectedIndex()) {
                     case 0:
                         GameVariables.setLevelFile("LevelZero");
+                        System.out.println("level 0");
                         break;
                     case 1:
                         GameVariables.setLevelFile("LevelOne");
+                        System.out.println("level 1");
                         break;
                     case 2:
                         GameVariables.setLevelFile("LevelTwo");
+                        System.out.println("level 2");
                         break;
                     case 3:
                         GameVariables.setLevelFile("LevelThree");
+                        System.out.println("level 3");
                         break;
                     case 4:
                         GameVariables.setLevelFile("LevelFour");
+                        System.out.println("level 4");
                         break;
                     case 5:
                         GameVariables.setLevelFile("LevelFive");
+                        System.out.println("level 5");
                         break;
                 }
             } else if (e.getSource() == players) {
@@ -135,24 +141,30 @@ public class Options {
                 switch (difficulties.getSelectedIndex()) {
                     case 0:
                         GameVariables.setRunnersToRender(3);
+                        System.out.println("difficulty easy");
                         break;
                     case 1:
                         GameVariables.setRunnersToRender(6);
+                        System.out.println("difficulty medium");
                         break;
                     case 2:
                         GameVariables.setRunnersToRender(8);
+                        System.out.println("difficulty hard");
                         break;
                     case 3:
                         GameVariables.setRunnersToRender(12);
+                        System.out.println("difficulty extreme");
                         break;
                 }
             } else if (e.getSource() == nights) {
                 switch (nights.getSelectedIndex()) {
                     case 0:
                         GameVariables.setIsNight(true);
+                        System.out.println("night");
                         break;
                     case 1:
                         GameVariables.setIsNight(false);
+                        System.out.println("day");
                         break;
                 }
             } else if (e.getSource() == enemies) {
@@ -160,22 +172,27 @@ public class Options {
                     case 0:
                         GameVariables.setHuntersToRender(0);
                         GameVariables.setHunterDamage(0);
+                        System.out.println("hunter disabled");
                         break;
                     case 1:
                         GameVariables.setHuntersToRender(1);
                         GameVariables.setHunterDamage(1);
+                        System.out.println("hunter easy");
                         break;
                     case 2:
                         GameVariables.setHuntersToRender(2);
                         GameVariables.setHunterDamage(1);
+                        System.out.println("hunter medium");
                         break;
                     case 3:
                         GameVariables.setHuntersToRender(4);                        
                         GameVariables.setHunterDamage(2);
+                        System.out.println("hunter hard");
                         break;
                     case 4:
                         GameVariables.setHuntersToRender(6);
                         GameVariables.setHunterDamage(3);
+                        System.out.println("hunter extreme");
                         break;
                 }
             }
