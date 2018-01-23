@@ -19,92 +19,91 @@ import java.util.Random;
  * @author poweg9141
  */
 public class EnemyHandler {
-    
+
     private Game game;
-    
+
     private List<Enemy> enemies;
     private int caughtEnemies;
-    
-    public EnemyHandler(Game game){
+
+    public EnemyHandler(Game game) {
         this.game = game;
-        enemies = new ArrayList<Enemy>();        
+        enemies = new ArrayList<Enemy>();
         caughtEnemies = 0;
     }
-    
-    public void tick(){
-        if(enemies.isEmpty())
+
+    public void tick() {
+        if (enemies.isEmpty()) {
             return;
+        }
         Iterator<Enemy> it = enemies.iterator();
-        while(it.hasNext()){
+        while (it.hasNext()) {
             Enemy e = it.next();
             e.tick();
-            if(e.isCaught()){
-                if(e.isRunning()){
+            if (e.isCaught()) {
+                if (e.isRunning()) {
                     it.remove();
                     caughtEnemies++;
-                }else{
+                } else {
                     e.damagePlayer();
-                }                
+                }
             }
         }
     }
-    
-    public void render(Graphics g){
-        for(Enemy e : enemies){
+
+    public void render(Graphics g) {
+        for (Enemy e : enemies) {
             e.render(g);
         }
     }
-    
-    public void addEnemy(Enemy e){
+
+    public void addEnemy(Enemy e) {
         enemies.add(e);
     }
-    
-    public void removeEnemy(Enemy e){
-            enemies.remove(e);       
-    }        
-    
-    public int getCaughtEnemies(){
+
+    public void removeEnemy(Enemy e) {
+        enemies.remove(e);
+    }
+
+    public int getCaughtEnemies() {
         return caughtEnemies;
     }
-    
-    public void createRunningEnemies(BufferedImage texture, int num){
-        if(num == 0)
+
+    public void createRunningEnemies(BufferedImage texture, int num) {
+        if (num == 0) {
             return;
+        }
         int toRender = num;
-        for(int y = game.getWorld().getTileHeight() - 1; y > 0; y--){
-            for(int x = game.getWorld().getTileWidth() - 1; x > 0; x--){
-                if(toRender == 0){
-                    return;
-                }
-                if(!game.getWorld().getTileAtPosition(x, y).isSolid()){
-                    Enemy e = new Enemy(game, texture, 0, 
-                            x * GameVariables.getSTANDARD_TILE_DIAMETER(),
-                            y * GameVariables.getSTANDARD_TILE_DIAMETER());
-                    enemies.add(e);
-                    toRender--;
-                }
+        Random rand = new Random();
+        while (toRender > 0) {
+            int x = rand.nextInt(game.getWorld().getTileWidth() - 1);
+            int y = rand.nextInt(game.getWorld().getTileHeight() - 1);
+            if (!game.getWorld().getTileAtPosition(x, y).isSolid() && x > 2 && y > 2) {
+                Enemy e = new Enemy(game, texture, 0,
+                        x * GameVariables.getSTANDARD_TILE_DIAMETER(),
+                        y * GameVariables.getSTANDARD_TILE_DIAMETER());
+                enemies.add(e);
+                toRender--;
             }
         }
     }
-    
-    public void createHuntingEnemies(BufferedImage texture, int num){
-        if(num == 0)
+
+    public void createHuntingEnemies(BufferedImage texture, int num) {
+        if (num == 0) {
             return;
+        }
         int toRender = num;
-        for(int y = game.getWorld().getTileHeight() - 1; y > 0; y--){
-            for(int x = game.getWorld().getTileWidth() - 1; x > 0; x--){
-                if(toRender == 0){
-                    return;
-                }
-                if(!game.getWorld().getTileAtPosition(x, y).isSolid()){
-                    Enemy e = new Enemy(game, texture, GameVariables.getHunterDamage(), 
+        Random rand = new Random();
+        while(toRender > 0){
+            int x = rand.nextInt(game.getWorld().getTileWidth() - 1);
+            int y = rand.nextInt(game.getWorld().getTileHeight() - 1);
+            if (!game.getWorld().getTileAtPosition(x, y).isSolid() && x > 3 && y > 3) {
+                    Enemy e = new Enemy(game, texture, GameVariables.getHunterDamage(),
                             x * GameVariables.getSTANDARD_TILE_DIAMETER(),
                             y * GameVariables.getSTANDARD_TILE_DIAMETER());
                     e.setRunning(false);
-                    enemies.add(e);                    
+                    enemies.add(e);
                     toRender--;
                 }
-            }
         }
     }
 }

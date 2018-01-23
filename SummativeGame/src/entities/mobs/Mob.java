@@ -76,7 +76,7 @@ public abstract class Mob extends Entity {
     
     public void dealDamae(int damage){
         if(!damagedBefore){
-           health -= damage;
+          // health -= damage;
             damagedBefore = true;
         }
         if(isDead())

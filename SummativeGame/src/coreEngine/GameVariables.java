@@ -16,21 +16,21 @@ public class GameVariables {
 	private static double playerWidth = 64;
 	private static double playerHeight = 64;
 	//the speed of a player
-	private static double playerSpeed = 0.02;
+	private static double playerSpeed = 0.2;
         //stores the speed of the enemies
-        private static double entitySpeed = 0.01;
+        private static double entitySpeed = 0.1;
 	//stores the default name and score for the high scores text file, used when creating a new file
 	//NOTE: default name must have NO spaces
 	private static final String defaultHighScoreName = "WendyWako";
         
         private static final int FlashlightDiameter = 1280;
         
-        private static String levelFile = "LevelFive";
+        private static String levelFile = "LevelZero";
         
         private static boolean isNight = true;
         
-        private static int runnersToRender = 6;
-        private static int huntersToRender = 2;
+        private static int runnersToRender = 3;
+        private static int huntersToRender = 0;
         
         private static int hunterDamage = 1;
 	
