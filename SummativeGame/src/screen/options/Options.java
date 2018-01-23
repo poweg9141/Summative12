@@ -82,6 +82,7 @@ public class Options {
         frame.add(enemy);
 
         enemies = new JComboBox(hunters);
+        enemies.addItemListener(handler);
         frame.add(enemies);
 
         button = new JButton("DONE");
