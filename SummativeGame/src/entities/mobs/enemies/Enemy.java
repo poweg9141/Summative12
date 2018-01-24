@@ -68,17 +68,6 @@ public class Enemy extends Mob {
     }
     
     private void setCaught(){
-        /*
-        float px = game.getPlayer().getX();
-        float py = game.getPlayer().getY();
-        float pw = game.getPlayer().getWidth();
-        float ph = game.getPlayer().getHeight();
-        if(px + pw > x && px < x + width){
-            if(py + pw > y && py < y + width){
-                caught = true;
-            }
-        }
-        */
         Player player = game.getPlayer();
         Rectangle pBounds = player.getBounds();
         if(player.getX() + pBounds.getWidth() >= x + bounds.x && player.getX() + pBounds.getX() <= x + bounds.width){

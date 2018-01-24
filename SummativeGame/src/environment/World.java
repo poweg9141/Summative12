@@ -26,16 +26,6 @@ public class World {
     
     private void initialize(String fileName){
         world = WorldLoader.loadWorld(this, fileName);
-        /*
-        System.out.println(tileWidth);
-        System.out.println(tileHeight);
-        for(int y = 0; y < tileHeight; y++){
-            for(int x = 0; x < tileWidth; x++){
-                System.out.print(world[x][y] + "    ");
-            }
-            System.out.println();
-        }
-        */
     }
     
     public void update(){

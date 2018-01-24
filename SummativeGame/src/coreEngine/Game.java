@@ -182,37 +182,6 @@ public class Game implements Runnable {
         //calls the stop method to close the thread now that the game has been closed
         stop(false);
     }
-    
-    //OLD TIMER
-    /*
-     //variables to store the time of the last frame, the time at the current frame, 
-        //and the max time it can take to render the frame
-        //used in the FPS cap and FPS counter system
-        long lastTime = System.nanoTime();
-        long currentTime = System.nanoTime();
-        double frameTime = 1000000000.0 / MAX_FPS;
-    
-    
-    //while the time it has taken to update is less than the time it can take
-            while (currentTime - lastTime < frameTime) {
-                //updates the game variables and the current time
-                update();
-                currentTime = System.nanoTime();
-                //calculates the time the frame took in nano seconds
-                long nanoTime = currentTime - lastTime;
-                //calculates the time the frame took in seconds
-                gameTimeSeconds = nanoTime / 1000000000.0;
-            }
-            //when the max time has been taken, it renders to the screen
-            render();
-            player.setDamagedBefore(false);
-            //calculates the FPS the game is currently running at
-            fps = (int) (Math.ceil(1.0 / gameTimeSeconds));
-            // set player speed
-            
-            //resets the lastTime variable to the current time
-            lastTime = currentTime;
-    */
 
     //initializes all the game code before the game loop
     private void initialize() {
