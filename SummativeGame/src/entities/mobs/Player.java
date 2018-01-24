@@ -3,6 +3,7 @@ package entities.mobs;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import coreEngine.Game;
+import coreEngine.GameVariables;
 import graphics.Camera;
 import graphics.SpriteSheet;
 import java.awt.Color;
@@ -24,7 +25,7 @@ public class Player extends Mob {
     private float dx, dy;
     private int index;
     private long lastTime;
-    private double desiredTimeBetweenFrame = 0.5;
+    private double desiredTimeBetweenFrame = 0.2;
 
     /**
      * to create a player for the game
@@ -43,7 +44,7 @@ public class Player extends Mob {
         player_right[0] = playerSheet.getSpriteAtIndex(0);
         player_right[1] = playerSheet.getSpriteAtIndex(1);
         player = player_right[0];
-        index = 0;
+        index = 1;
         this.game = game;
         bounds.setBounds(24, 45, 14, 19);
         health = 100;
@@ -63,9 +64,11 @@ public class Player extends Mob {
         if(lastTime == 0){
             lastTime = Time.getCurrentTime();
         }
-        if(Time.hasBeenTime(lastTime, desiredTimeBetweenFrame)){
-            index++;
-            if(index > 1){
+        if(Time.hasBeenTime(lastTime, desiredTimeBetweenFrame)){            
+            lastTime = Time.getCurrentTime();
+            if(index == 0){
+                index = 1;
+            }else{
                 index = 0;
             }
         }
@@ -92,6 +95,11 @@ public class Player extends Mob {
      */
     public void move(float dx, float dy) {
         //moves the player the passed in x and y displacements
+        if(game.getWorld().getTileAtPosition((int) ((x + bounds.x)/GameVariables.getSTANDARD_TILE_DIAMETER()), 
+                (int)((y + bounds.y)/GameVariables.getSTANDARD_TILE_DIAMETER())).getId() == 6){
+            dx *= 0.3;
+            dy *= 0.3;
+        }
         super.move(dx, dy);
         this.dx = dx;
         this.dy = dy;

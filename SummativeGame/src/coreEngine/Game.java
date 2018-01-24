@@ -79,6 +79,8 @@ public class Game implements Runnable {
     private Camera camera;
     private EnemyHandler enemies;
     private World world;
+    
+    private long gameStartTime, gameEndTime;
 
     /**
      * Constructor to create the game
@@ -154,15 +156,41 @@ public class Game implements Runnable {
         //calls the initialize method
         initialize();
 
-        //variables to store the time of the last frame, the time at the current frame, 
+        double frameTime = 1000000000 / MAX_FPS;
+        double delta = 0;
+        long now;
+        long lastTime = System.nanoTime();
+        long oldTime = System.nanoTime();
+        
+        gameStartTime = System.nanoTime();
+        
+        while (running) {
+            now = System.nanoTime();
+            delta += (now - lastTime) / frameTime;
+            lastTime = now;
+            if(delta >= 1){
+                gameTimeSeconds = (now - oldTime) / 1000000000;
+                fps = MAX_FPS;
+                update();
+                render();
+                delta--;
+            }
+        }        
+        //calls the stop method to close the thread now that the game has been closed
+        stop(false);
+    }
+    
+    //OLD TIMER
+    /*
+     //variables to store the time of the last frame, the time at the current frame, 
         //and the max time it can take to render the frame
         //used in the FPS cap and FPS counter system
         long lastTime = System.nanoTime();
         long currentTime = System.nanoTime();
         double frameTime = 1000000000.0 / MAX_FPS;
-        //game loop to run until game is closed
-        while (running) {
-            //while the time it has taken to update is less than the time it can take
+    
+    
+    //while the time it has taken to update is less than the time it can take
             while (currentTime - lastTime < frameTime) {
                 //updates the game variables and the current time
                 update();
@@ -179,10 +207,7 @@ public class Game implements Runnable {
             fps = (int) (Math.ceil(1.0 / gameTimeSeconds));
             //resets the lastTime variable to the current time
             lastTime = currentTime;
-        }        
-        //calls the stop method to close the thread now that the game has been closed
-        stop(false);
-    }
+    */
 
     //initializes all the game code before the game loop
     private void initialize() {
@@ -240,7 +265,9 @@ public class Game implements Runnable {
 
     //method runs before the game closes
     private void closeGame() {
+        gameEndTime = System.nanoTime();
         //saves the scores to the text file
+        scores.addScore("bob", getGameRunTime());
         scores.saveScores();
     }
 
@@ -330,5 +357,11 @@ public class Game implements Runnable {
 
     public EnemyHandler getEnemyHandler() {
         return enemies;
+    }
+    
+    public int getGameRunTime(){
+        long difference = gameEndTime - gameStartTime;
+        int diffSec = (int) Math.ceil(difference / 1000000000);
+        return diffSec;
     }
 }
