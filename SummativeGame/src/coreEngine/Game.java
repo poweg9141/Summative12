@@ -271,8 +271,12 @@ public class Game implements Runnable {
     //method runs before the game closes
     private void closeGame() {
         gameEndTime = System.nanoTime();
-        //saves the scores to the text file
-        scores.addScore("bob", getGameRunTime());
+        //saves the scores to the text file     
+        if(GameVariables.getPlayerName() != null){
+            scores.addScore(GameVariables.getPlayerName(), getGameRunTime());
+        }else{
+            scores.addScore(GameVariables.getDefaultHighScoreName(), getGameRunTime());
+        }       
         scores.saveScores();
     }
 

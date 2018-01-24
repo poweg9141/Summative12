@@ -64,7 +64,7 @@ public class DisplayManager {
     }
     
     public void openWin(){
-        endTime = System.currentTimeMillis();
+        endTime = System.currentTimeMillis();        
         if(won == null){
             won = new GameWon(this, ScreenVariables.getGameWonName(), 
                     ScreenVariables.getGameWonWidth(), ScreenVariables.getGameWonHeight(), (double)((endTime-startTime)/1000));

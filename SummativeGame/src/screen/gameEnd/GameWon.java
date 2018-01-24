@@ -5,11 +5,13 @@
  */
 package screen.gameEnd;
 
+import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -17,6 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import loaders.ImageLoader;
+import loaders.ScoreLoader;
 import screen.DisplayManager;
 import screen.Window;
 
@@ -25,6 +28,8 @@ import screen.Window;
  * @author Graham
  */
 public class GameWon {
+    
+   
     
     private DisplayManager manager;
     private Window window;
@@ -39,8 +44,9 @@ public class GameWon {
     public GameWon(DisplayManager manager, String title, int width, int height, double scoretime){
         window = new Window(title, width, height);
         this.manager = manager;
-        score = scoretime;
+        score = ScoreLoader.multiplyScore((int)Math.ceil(scoretime));
         frame = window.getFrame();
+        System.out.println("Score: " + score);
         initialize();
     }
     
@@ -48,14 +54,15 @@ public class GameWon {
         BufferedImage lostIcon = ImageLoader.loadImage("endGame/gamewon", ImageLoader.IMAGE_PNG_FORMAT_ID);
         
         image = new JLabel();       
-        image.setIcon(new ImageIcon(lostIcon));
+        image.setIcon(new ImageIcon(lostIcon));        
         
-        textbox = new JTextField("Score: " + score);
+        BorderLayout b = new BorderLayout();
+        frame.setLayout(b);
         
         panel = new JPanel();
         panel.add(image);
         frame.add(panel);
-        frame.add(textbox);     
+        b.addLayoutComponent(panel, BorderLayout.CENTER);        
         frame.validate();
         
         frame.addMouseListener(new MouseListener(){
@@ -95,4 +102,5 @@ public class GameWon {
     public void frameVisibility(boolean visible){
         frame.setVisible(visible);
     }
+    
 }

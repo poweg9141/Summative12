@@ -132,14 +132,14 @@ public class ScoreLoader {
             swap(tempScores, smallest, pos);
             swap(tempNames, smallest, pos);
         }
-        //copys the larger array back to the old array backwards, to ensure the smallest score gets left out
-        for(int i = 1; i < tempScores.length; i++){
-        	points[i - 1] = tempScores[i];
-        	names[i - 1] = tempNames[i];
+        //copys the larger array back to the old array, to ensure the largest score gets left out
+        for(int i = 0; i < tempScores.length - 1; i++){
+        	points[i] = tempScores[i];
+        	names[i] = tempNames[i];
         }
 	}
         
-        private int multiplyScore(int score){
+        public static int multiplyScore(int score){
             double multiplier = 1;
             switch(GameVariables.getRunnersToRender()){
                 case 3:
