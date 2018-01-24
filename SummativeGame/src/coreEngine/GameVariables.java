@@ -22,7 +22,7 @@ public class GameVariables {
 	//stores the default name and score for the high scores text file, used when creating a new file
 	//NOTE: default name must have NO spaces
 	private static final String defaultHighScoreName = "WendyWako";
-        private static String playerName = "";
+        private static String playerName = "WendyWako";
         
         private static final int FlashlightDiameter = 1280;
         

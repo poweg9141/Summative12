@@ -274,8 +274,10 @@ public class Game implements Runnable {
         //saves the scores to the text file     
         if(GameVariables.getPlayerName() != null){
             scores.addScore(GameVariables.getPlayerName(), getGameRunTime());
+            System.out.println("normal");
         }else{
-            scores.addScore(GameVariables.getDefaultHighScoreName(), getGameRunTime());
+            scores.addScore("bob", getGameRunTime());
+            System.out.println("default");
         }       
         scores.saveScores();
     }
