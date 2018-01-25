@@ -272,7 +272,11 @@ public class Game implements Runnable {
     private void closeGame() {
         gameEndTime = System.nanoTime();
         //saves the scores to the text file
-        scores.addScore("bob", getGameRunTime());
+        if(1 == 2){
+            
+        }else{
+            scores.addScore(GameVariables.getPlayerName(), getGameRunTime());
+        }        
         scores.saveScores();
     }
 

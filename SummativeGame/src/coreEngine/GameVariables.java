@@ -23,6 +23,8 @@ public class GameVariables {
 	//NOTE: default name must have NO spaces
 	private static final String defaultHighScoreName = "WendyWako";
         
+        private static String playerName = "WendyWako";
+        
         private static final int FlashlightDiameter = 1280;
         
         private static String levelFile = "LevelZero";
@@ -221,5 +223,13 @@ public class GameVariables {
 
     public static void setHunterDamage(int hunterDamage) {
         GameVariables.hunterDamage = hunterDamage;
+    }
+
+    public static String getPlayerName() {
+        return playerName;
+    }
+
+    public static void setPlayerName(String playerName) {
+        GameVariables.playerName = playerName;
     }
 }

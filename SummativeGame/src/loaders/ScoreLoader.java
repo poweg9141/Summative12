@@ -102,6 +102,7 @@ public class ScoreLoader {
 	public void addScore(String name, int score){
             //calls the method that adds all the multipliers to the score
             score = multiplyScore(score);
+            System.out.println("Your Score: " + score);
 		//copys the arrays over to a new array with one extra spot
 		String[] tempNames = Arrays.copyOf(names, names.length + 1);
 		int[] tempScores = Arrays.copyOf(points, points.length + 1);
@@ -132,10 +133,10 @@ public class ScoreLoader {
             swap(tempScores, smallest, pos);
             swap(tempNames, smallest, pos);
         }
-        //copys the larger array back to the old array backwards, to ensure the smallest score gets left out
-        for(int i = 1; i < tempScores.length; i++){
-        	points[i - 1] = tempScores[i];
-        	names[i - 1] = tempNames[i];
+        //copys the larger array back to the old array, to ensure the largest score gets left out
+        for(int i = 0; i < tempScores.length - 1; i++){
+        	points[i] = tempScores[i];
+        	names[i] = tempNames[i];
         }
 	}
         

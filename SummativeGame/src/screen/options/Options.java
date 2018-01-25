@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JTextField;
 import screen.DisplayManager;
 import screen.Window;
 
@@ -32,7 +33,8 @@ public class Options {
     private JButton button;
 
     private JLabel level, night, enemy, difficulty, player;
-    private JComboBox levels, nights, enemies, difficulties, players;
+    private JComboBox levels, nights, enemies, difficulties;
+    private JTextField players;
     String[] playerNames = {"bob"};
     String[] levelNames = {"Zero", "One", "Two", "Three", "Four", "Five"};
     String[] difficultyNames = {"Easy", "Medium", "Hard", "Extreme"};
@@ -53,8 +55,7 @@ public class Options {
 
         player = new JLabel("Player: ");
         frame.add(player);
-        players = new JComboBox(playerNames);
-        players.addItemListener(handler);
+        players = new JTextField();
         frame.add(players);
 
         level = new JLabel("Select Level: ");
@@ -78,16 +79,21 @@ public class Options {
         nights.addItemListener(handler);
         frame.add(nights);
 
-        enemy = new JLabel("Hunters: ");
+        enemy = new JLabel("Hunters: ");        
         frame.add(enemy);
 
         enemies = new JComboBox(hunters);
+        enemies.addItemListener(handler);
         frame.add(enemies);
 
         button = new JButton("DONE");
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                String name = players.getText().replaceAll(" ", "");
+                if(name != null && !"".equals(name)){
+                    GameVariables.setPlayerName(name);
+                }
                 frameVisibility(false);
                 manager.openLauncher();
             }
@@ -132,12 +138,7 @@ public class Options {
                         System.out.println("level 5");
                         break;
                 }
-            } else if (e.getSource() == players) {
-                switch (players.getSelectedIndex()) {
-                    case 0:
-                        break;
-                }
-            } else if (e.getSource() == difficulties) {
+            }else if (e.getSource() == difficulties) {
                 switch (difficulties.getSelectedIndex()) {
                     case 0:
                         GameVariables.setRunnersToRender(3);

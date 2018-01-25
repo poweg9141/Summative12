@@ -55,7 +55,7 @@ public class GameWon {
         panel = new JPanel();
         panel.add(image);
         frame.add(panel);
-        frame.add(textbox);     
+        //frame.add(textbox);     
         frame.validate();
         
         frame.addMouseListener(new MouseListener(){
