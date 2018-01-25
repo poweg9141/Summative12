@@ -58,6 +58,7 @@ public class EnemyHandler {
                     caughtEnemies++;
                     //if its a hunter, it damages the player
                 } else {
+                    System.out.println("damage");
                     e.damagePlayer();
                 }
             }

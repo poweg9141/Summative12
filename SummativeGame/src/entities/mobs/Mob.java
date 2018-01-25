@@ -101,8 +101,6 @@ public abstract class Mob extends Entity {
         if (!damagedBefore) {
             //subtracts the damage to be dealt from their health
             health -= damage;
-            //sets damagedBefore to true so the entity is not acidentlty damaged twice
-            damagedBefore = true;
         }
         //if the enemy is dead calls the method to handle their death
         if (isDead()) {
