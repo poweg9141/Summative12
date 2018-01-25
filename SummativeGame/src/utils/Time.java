@@ -30,6 +30,7 @@ public class Time {
         return date;
     }
     
+    //checks if it has been a specified time based on when the checking started
     public static boolean hasBeenTime(long startTime, double desiredTimeSeconds){
         if(getCurrentTime() - startTime >= desiredTimeSeconds * 1000000000){
             return true;

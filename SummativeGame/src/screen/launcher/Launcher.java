@@ -16,7 +16,7 @@ import screen.Window;
 
 /**
  * the class that creates the frame and handles the launcher window
- * @author Graham
+ * @author Graham, Michael
  *
  */
 public class Launcher{

@@ -1,12 +1,7 @@
 package screen.errors;
 
-import java.awt.FlowLayout;
-
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-
 import screen.DisplayManager;
-import screen.Window;
 
 /**
  * a window to display the fatal error message to the user if the game has to crash

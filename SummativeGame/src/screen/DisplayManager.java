@@ -1,9 +1,6 @@
 package screen;
 
-import javax.swing.JFrame;
-
 import coreEngine.Game;
-import java.util.Timer;
 import screen.errors.FatalError;
 import screen.gameEnd.GameLost;
 import screen.gameEnd.GameWon;
@@ -30,6 +27,7 @@ public class DisplayManager {
     private GameWon won;
     static DisplayManager thisManager;
 
+    //stores the start and end time of the game
     long startTime;
     long endTime;
     /**
@@ -57,12 +55,12 @@ public class DisplayManager {
             game = new Game(this, ScreenVariables.getGameName(),
                     ScreenVariables.getGameWidth(), ScreenVariables.getGameHeight(), startTime);
             game.start();
-            //game.run();
         } else {
             game.gameVisibility(true);
         }
     }
     
+    //used to open the win screen or start it if it has not already been initialized
     public void openWin(){
         endTime = System.currentTimeMillis();
         if(won == null){
@@ -73,6 +71,7 @@ public class DisplayManager {
         }
     }
     
+    //used to open the lost screen or start it if it has not already been initialized
     public void openLost(){
         if(lost == null){
             lost = new GameLost(this, ScreenVariables.getGameLostName(), 
@@ -92,6 +91,7 @@ public class DisplayManager {
         }   
     }
     
+    //used to close the game
     public void closeGame(){
         System.exit(0);        
     }

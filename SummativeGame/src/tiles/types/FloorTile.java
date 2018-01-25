@@ -7,22 +7,24 @@ import tiles.Tile;
 
 /**
  * a tile that can be walked on
+ *
  * @author Graham
  *
  */
-public class FloorTile extends Tile{	
+public class FloorTile extends Tile {
 
     private int speedMultiplier;
     private boolean forceMove;
     private int damageDealtPerSecond;
-    
-	/**
-	 * create a floor tile
-	 * @param id the id of the tile from the GameVariables class
-	 */
-	public FloorTile(Game game, int id) {
-		super(game, id, false);
-	}
+
+    /**
+     * create a floor tile
+     *
+     * @param id the id of the tile from the GameVariables class
+     */
+    public FloorTile(Game game, int id) {
+        super(game, id, false);
+    }
 
     public int getSpeedMultiplier() {
         return speedMultiplier;
@@ -32,6 +34,8 @@ public class FloorTile extends Tile{
         this.speedMultiplier = speedMultiplier;
     }
 
+    //to be implemented later
+    /*
     public boolean isForceMove() {
         return forceMove;
     }
@@ -47,9 +51,9 @@ public class FloorTile extends Tile{
     public void setDamageDealtPerSecond(int damageDealtPerSecond) {
         this.damageDealtPerSecond = damageDealtPerSecond;
     }
-    
+     */
     @Override
-    public boolean isSolid(){
+    public boolean isSolid() {
         return false;
     }
 }

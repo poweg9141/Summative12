@@ -16,32 +16,29 @@ import tiles.Tile;
  */
 public class World {
     
+    //stores the width and height of the world in tiles
     private int tileWidth, tileHeight;
+    //stores the players starting position
     private int playerX, playerY;
+    //integer array of the world to store tile ids
     private int[][] world;
     
+    //creates a world
     public World(String fileName){
         initialize(fileName);
     } 
     
+    //loads the world with the file name passed in
     private void initialize(String fileName){
         world = WorldLoader.loadWorld(this, fileName);
-        /*
-        System.out.println(tileWidth);
-        System.out.println(tileHeight);
-        for(int y = 0; y < tileHeight; y++){
-            for(int x = 0; x < tileWidth; x++){
-                System.out.print(world[x][y] + "    ");
-            }
-            System.out.println();
-        }
-        */
     }
     
+    //update method
     public void update(){
         
     }
     
+    //loops through and renders every tile in the world by there tile ids
     public void render(Graphics g){        
         for(int y = 0; y < tileHeight; y++){
             for(int x = 0; x < tileWidth; x++){
@@ -51,18 +48,31 @@ public class World {
         } 
     }
     
+    /**
+     * gets a tile at an x and y position
+     * @param x the x pos of the tile
+     * @param y the y pos if the tile
+     * @return 
+     */
     public Tile getTileAtPosition(int x, int y){
+        //creates a grass tile in case there is a problem finding the tile
         Tile t = Tile.tiles[Tile.returnRenderID(GameVariables.getGrassTileId())];
+        //if the position is in the world, trys to get the tile at that position
         if(!(x < 0) || !(y < 0) || !(x >= tileWidth) || !(y >= tileHeight))           
             try{
                 t = Tile.tiles[Tile.returnRenderID(world[x][y])];
             }catch(ArrayIndexOutOfBoundsException e){
+                //if it cant find the tile or an error is thrown, returns a grass tile so the game doent crash
                 t = Tile.tiles[Tile.returnRenderID(GameVariables.getGrassTileId())];
             }
+        //if t is null creates a new grass tile to return
         if(t == null)                  
             t = Tile.tiles[Tile.returnRenderID(GameVariables.getDefaultTileId())];
+        //returns the found tile        
         return t;
     }
+    
+    //getters and setters below
 
     public int getTileWidth() {
         return tileWidth;

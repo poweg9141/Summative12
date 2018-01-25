@@ -1,6 +1,5 @@
 package coreEngine;
 
-import entities.mobs.enemies.Enemy;
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -18,8 +17,6 @@ import environment.World;
 import graphics.Camera;
 import graphics.SpriteSheet;
 import input.KeyInput;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import loaders.ImageLoader;
 import loaders.ScoreLoader;
 import screen.DisplayManager;
@@ -31,7 +28,7 @@ import tiles.types.WallTile;
 /**
  * class to run the games thread and control game logic
  *
- * @author Graham
+ * @author Graham, Michael
  *
  */
 public class Game implements Runnable {
@@ -77,16 +74,18 @@ public class Game implements Runnable {
     //end time
     long endTime;
     
+    //stores the created player, camera, enemy handler, and world, for use within the class and to pass to other classes
     private Player player;
     private Camera camera;
     private EnemyHandler enemies;
     private World world;
     
+    //stores the time the game started and ended at in nano seconds
     private long gameStartTime, gameEndTime;
 
     /**
-     * Constructor to create the game
-     *
+     * Constructor to create the game     
+     * @param manager the display manager the game is created from
      * @param title the title to be displayed to the games JFrame
      * @param width the width of the games JFrame
      * @param height the height of the games JFrame
@@ -101,22 +100,29 @@ public class Game implements Runnable {
         this.startTime = startTime;
         //initializes the score loader
         scores = new ScoreLoader();
+        //creates a new camera at the starting position 0, 0
         camera = new Camera(this, 0, 0);
+        //creates the world using the file name from the GameVariables class
         world = new World(GameVariables.getLevelFile());
+        //creates a new enemy handler
         enemies = new EnemyHandler(this);
     }
 
     //method to update the game every frame before rendering
     private void update() {
+        //updates the input, which is in charge of getting keyboard input and moving the player
         input.update();
+        //updates the world, which moves all the tiles the correct displacement so it looks like the player is moving throughout the world
         world.update();
+        //updates the player, which checks if its dead and decides which image to use
         player.tick();
-        enemies.tick();
+        //updates the enemies positions
+        enemies.update();
 
+        //if the enemies the player has caught equals the enemies rendered, stop the game since the player has won
         if(enemies.getCaughtEnemies() >= GameVariables.getRunnersToRender()){
             stop(true);
         }
-        // tile.setImage(Tile.tiles[Tile.returnRenderID(GameVariables.getRUBBLE_TILE_ID())].getImage());
     }
 
     //method the render the game to the screen once updated
@@ -137,11 +143,13 @@ public class Game implements Runnable {
         g.clearRect(0, 0, width, height);
 
         //DRAWING BEGINS HERE	
+        //renders the world first so it is in the back
         world.render(g);
+        //renders the enemies
         enemies.render(g);
-
+        //renders the player last so it is on top of everything
         player.render(g);
-        // places the flashlight filter overtop everything
+        // places the flashlight filter overtop everything, if night was selected
         if (GameVariables.isIsNight()) {
             flashlight.render(g);
         }
@@ -159,65 +167,53 @@ public class Game implements Runnable {
         //calls the initialize method
         initialize();
 
+        //stores the time allowed to render one frame to the screen
         double frameTime = 1000000000 / MAX_FPS;
+        //used to store, in decimal percent value, how much of the alloted time has passed
         double delta = 0;
+        //variables to store the time now, the last time
         long now;
         long lastTime = System.nanoTime();
+        //variable to store the old time, used in time calculations
         long oldTime = System.nanoTime();
-        
+        //sets the start time of the game before the game starts rendering
         gameStartTime = System.nanoTime();
         
+        //while loop to run as long as the game is running
         while (running) {
+            //updates the time in the now variable
             now = System.nanoTime();
+            //updates the delta variable
             delta += (now - lastTime) / frameTime;
+            //updates the last time to now, after the lastTime has been used in calculations
             lastTime = now;
+            //if 100% or more of the timme alloted to render has passed, render the next frame
             if(delta >= 1){
+                //update the time in seconds, the last frame took to render
+                //NOTE: it should always be 1/60th of a second but this calculation is done just in case
                 gameTimeSeconds = (now - oldTime) / 1000000000;
+                //sets the fps to the maximum amount of fps in the game, in case it needs to be acessed from outside the class
                 fps = MAX_FPS;
+                //calls the update method, to update all variables before rendering
                 update();
+                //calls the render method to render everything to the screen
                 render();
+                //subtracts one from delta, used to reset the delta variable
+                //NOTE: if exactly 100% of the time is passed, delta will be 0, 
+                //if not delta will be the decimal percent of extra time taken, and will count toward the render time of the next frame
+                //in an effort to bring the gamer back on track if rendering falls behind
                 delta--;
             }
         }        
-        //calls the stop method to close the thread now that the game has been closed
+        //calls the stop method to close the thread now that the game has been closed, defaults to a loss
         stop(false);
     }
-    
-    //OLD TIMER
-    /*
-     //variables to store the time of the last frame, the time at the current frame, 
-        //and the max time it can take to render the frame
-        //used in the FPS cap and FPS counter system
-        long lastTime = System.nanoTime();
-        long currentTime = System.nanoTime();
-        double frameTime = 1000000000.0 / MAX_FPS;
-    
-    
-    //while the time it has taken to update is less than the time it can take
-            while (currentTime - lastTime < frameTime) {
-                //updates the game variables and the current time
-                update();
-                currentTime = System.nanoTime();
-                //calculates the time the frame took in nano seconds
-                long nanoTime = currentTime - lastTime;
-                //calculates the time the frame took in seconds
-                gameTimeSeconds = nanoTime / 1000000000.0;
-            }
-            //when the max time has been taken, it renders to the screen
-            render();
-            player.setDamagedBefore(false);
-            //calculates the FPS the game is currently running at
-            fps = (int) (Math.ceil(1.0 / gameTimeSeconds));
-            // set player speed
-            
-            //resets the lastTime variable to the current time
-            lastTime = currentTime;
-    */
 
     //initializes all the game code before the game loop
     private void initialize() {
         //creates a new display running on the created thread
         display = new Window(title, width, height);
+        //stores the JFrame created by the display
         frame = display.getFrame();
 
         //initialize the canvas object		
@@ -234,8 +230,11 @@ public class Game implements Runnable {
         frame.pack();
 
         //creates the player
+        //loads in the sprite sheet of the player
         BufferedImage playerIcon = ImageLoader.loadImage("player_sheet", ImageLoader.IMAGE_PNG_FORMAT_ID);
+        //creates the player sprite sheet
         SpriteSheet playerSheet = new SpriteSheet(playerIcon, 2, 64);
+        //creates the player using the sprite sheet, and the designated x and y spawn from the world file       
         player = new Player(this, playerSheet, world.getPlayerX(), world.getPlayerY());
 
         // creates the flashlight
@@ -250,8 +249,7 @@ public class Game implements Runnable {
         frame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                //calls the method to run all code that needs to execute before the game closes
-                closeGame();
+                //does nothing at the moment
             }
         });
 
@@ -262,21 +260,22 @@ public class Game implements Runnable {
         //calls the method where all tiles that are to be created will be
         createTiles();
 
+        //loads in the buffered images of the runners the player must find, and the hunters that will hunt them
         BufferedImage runnerIcon = ImageLoader.loadImage("npcs/runner", ImageLoader.IMAGE_PNG_FORMAT_ID);
         BufferedImage hunterIcon = ImageLoader.loadImage("npcs/hunter", ImageLoader.IMAGE_PNG_FORMAT_ID);
+        //creates the runners using the buffered image loaded in above an the specified number of them from the GameVariables class
         enemies.createRunningEnemies(runnerIcon, GameVariables.getRunnersToRender());
+        //creates the hunters using the buffered image loaded in above an the specified number of them from the GameVariables class
         enemies.createHuntingEnemies(hunterIcon, GameVariables.getHuntersToRender());
     }
 
     //method runs before the game closes
     private void closeGame() {
+        //stores the time the game ended in nano seconds
         gameEndTime = System.nanoTime();
+        //trys to add the new score to the high scores list, passing in the players name and game run time
+        scores.addScore(GameVariables.getPlayerName(), getGameRunTime()); 
         //saves the scores to the text file
-        if(1 == 2){
-            
-        }else{
-            scores.addScore(GameVariables.getPlayerName(), getGameRunTime());
-        }        
         scores.saveScores();
     }
 
@@ -286,8 +285,11 @@ public class Game implements Runnable {
         new FloorTile(this, GameVariables.getDefaultTileId());
         //creates a new wall tile using the stone texture
         new WallTile(this, GameVariables.getStoneTileId());
+        //creates a new floor tile using the rubble texture
         new FloorTile(this, GameVariables.getRUBBLE_TILE_ID());
+        //creates a new floor tile using the grass texture
         new FloorTile(this, GameVariables.getGrassTileId());
+        //creates a new wall tile using the mossy stone texture
         new WallTile(this, GameVariables.getMossystoneTileId());
     }
 
@@ -327,6 +329,8 @@ public class Game implements Runnable {
         }
         
     }
+    
+    //getters and setters below
     
     public void gameVisibility(boolean visible){
         frame.setVisible(visible);
@@ -368,9 +372,13 @@ public class Game implements Runnable {
         return enemies;
     }
     
+    //calculates and returns to the nearest second, how long the game ran for
     public int getGameRunTime(){
+        //gets the difference between the game end and start times
         long difference = gameEndTime - gameStartTime;
+        //converts that difference to a time in seconds by dividing by 1x10^9 rounding up, and casting to an int
         int diffSec = (int) Math.ceil(difference / 1000000000);
+        //returnsthe game run time in seconds
         return diffSec;
     }
 }

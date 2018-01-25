@@ -19,6 +19,7 @@ public class WallTile extends Tile{
 		super(game, id, true);
 	}     
         
+        //returns that the tile is solid
         @Override
         public boolean isSolid(){
             return true;

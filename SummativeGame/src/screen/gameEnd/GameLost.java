@@ -4,9 +4,6 @@
  */
 package screen.gameEnd;
 
-import java.awt.Canvas;
-import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
@@ -20,17 +17,26 @@ import screen.Window;
 
 /**
  *
- * @author poweg9141
+ * @author poweg9141, Michael
  */
 public class GameLost {
     
+    //stores the display manager, window and JFrame
     private DisplayManager manager;
     private Window window;
     private JFrame frame;
     
+    //creates an image and panel to put the image in
     private JLabel image;
     private JPanel panel;
     
+    /**
+     * create a game lost screen
+     * @param manager the display manager to control the screen
+     * @param title the title of the screen
+     * @param width the width of the screen
+     * @param height the height of the screen
+     */
     public GameLost(DisplayManager manager, String title, int width, int height){
         window = new Window(title, width, height);
         this.manager = manager;
@@ -39,16 +45,21 @@ public class GameLost {
     }
     
     private void initialize(){
+        //creates a buffered image of the lost png image
         BufferedImage lostIcon = ImageLoader.loadImage("endGame/gameLost", ImageLoader.IMAGE_PNG_FORMAT_ID);
         
+        //creates the label and sets it to an image icon
         image = new JLabel();       
         image.setIcon(new ImageIcon(lostIcon));
         
+        //adds the image to the panel and the panel to the screen
         panel = new JPanel();
         panel.add(image);
         frame.add(panel);
+        //validates everything added to the frame
         frame.validate();
         
+        //adds a mouse listener to the frame to listen for clicks
         frame.addMouseListener(new MouseListener(){
             @Override
             public void mouseClicked(MouseEvent e){
@@ -56,6 +67,7 @@ public class GameLost {
 
             @Override
             public void mousePressed(MouseEvent e) {
+                //if the player clicked on a button, executed the correct code for that button
                 if(e.getX() >= 110 && e.getX() <= 245 && e.getY() >= 450 && e.getY() <= 550){
                     frameVisibility(false);
                     manager.openGame();
@@ -83,6 +95,7 @@ public class GameLost {
         frame.setVisible(true);
     }
     
+    //sets the frame visibility to the passed in boolean
     public void frameVisibility(boolean visible){
         frame.setVisible(visible);
     }

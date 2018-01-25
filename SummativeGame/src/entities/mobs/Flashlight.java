@@ -15,6 +15,7 @@ import java.awt.image.BufferedImage;
  */
 public class Flashlight extends Mob{
     
+    
     BufferedImage flashlight;
     private Game game;
     

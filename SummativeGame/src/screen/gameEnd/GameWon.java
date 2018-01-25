@@ -22,10 +22,11 @@ import screen.Window;
 
 /**
  *
- * @author Graham
+ * @author Graham, Michael
  */
 public class GameWon {
     
+    //stores the display manager, window and frame
     private DisplayManager manager;
     private Window window;
     private JFrame frame;
@@ -34,6 +35,7 @@ public class GameWon {
     private JPanel panel;
     private JTextField textbox;
     
+    //stores the score
     private double score;
 
     public GameWon(DisplayManager manager, String title, int width, int height, double scoretime){
@@ -44,6 +46,7 @@ public class GameWon {
         initialize();
     }
     
+    //identical to the initialize method in the game lost class
     private void initialize(){
         BufferedImage lostIcon = ImageLoader.loadImage("endGame/gamewon", ImageLoader.IMAGE_PNG_FORMAT_ID);
         
@@ -92,6 +95,7 @@ public class GameWon {
         frame.setVisible(true);
     }
     
+    //sets the frame visibility to the passed in boolean
     public void frameVisibility(boolean visible){
         frame.setVisible(visible);
     }

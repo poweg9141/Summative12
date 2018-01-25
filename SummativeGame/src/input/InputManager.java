@@ -7,7 +7,7 @@ import entities.mobs.Player;
 
 /**
  * takes the inputs from the KeyInput class and does the appropriate action based on the input
- * @author Graham
+ * @author Graham, Michael
  *
  */
 public class InputManager {
@@ -60,7 +60,5 @@ public class InputManager {
 		}
 		//calls the players move method and passed in the x and y displacements calculated above
 		player.move(x, y);
-                //calls the flashlights move method and moves so it is still perfectly centered around the player
-          //      flashlight.move(x,y);
 	}
 }
